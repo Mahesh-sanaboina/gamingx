@@ -6,7 +6,7 @@ const products = [
   { id: 1, name: "Aether Core PC", price: "₹1,49,999", image: "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&q=80&w=800", rating: 4.9 },
   { id: 2, name: "Nexus RTX 4090", price: "₹1,59,999", image: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&q=80&w=800", rating: 5.0 },
   { id: 3, name: "Cyber Mechanical", price: "₹12,999", image: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&q=80&w=800", rating: 4.8 },
-  { id: 4, name: "Precision Mouse", price: "₹8,499", image: "/precision_mouse_1778741461541.png", rating: 4.7 },
+  { id: 4, name: "Precision Mouse", price: "₹8,499", image: "/white_luxury_gaming_mouse_1778759198451.png", rating: 4.7 },
   { id: 5, name: "UltraWide 4K", price: "₹89,999", image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&q=80&w=800", rating: 4.9 },
   { id: 6, name: "Immersive Headset", price: "₹19,999", image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&q=80&w=800", rating: 4.8 },
 ];

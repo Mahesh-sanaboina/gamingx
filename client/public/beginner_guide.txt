@@ -1,0 +1,35 @@
+# How to Build a Gaming Setup from Zero to 100% (Beginner Guide)
+
+Welcome to the GamingX Beginner Guide! This document will walk you through the essentials of building your first professional gaming station.
+
+## 1. Gaming PC Basics
+- CPU: The brain of your system. Look for 6 cores or more.
+- GPU: Essential for gaming. NVIDIA RTX 4060 or AMD RX 7600 are great starters.
+- RAM: 16GB is the modern standard for gaming.
+
+## 2. Monitor Setup
+- Refresh Rate: Aim for at least 144Hz for a smooth experience.
+- Resolution: 1080p is perfect for beginners.
+
+## 3. Keyboard & Mouse Setup
+- Mechanical Keyboards: Offer better feedback and durability.
+- Lightweight Mouse: Essential for precision in FPS games.
+
+## 4. Gaming Accessories
+- Desk Mat: Large surface for mouse movement.
+- Headset: Comfort is key for long sessions.
+
+## 5. RGB Setup Ideas
+- Use soft, consistent colors (Cyan, Purple, or White).
+- LED strips behind the desk create an ethereal glow.
+
+## 6. Budget Gaming Setup
+- Focus on performance first, aesthetics later.
+- Buy used monitors to save for a better GPU.
+
+## 7. Beginner Streaming Setup
+- Use OBS Studio for broadcasting.
+- A basic 1080p webcam and a clip-on mic are enough to start.
+
+Stay Ethereal. Stay Gaming.
+- GamingX Team

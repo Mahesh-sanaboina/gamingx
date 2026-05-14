@@ -11,6 +11,7 @@ import CartSidebar from './components/CartSidebar';
 import CheckoutModal from './components/CheckoutModal';
 import FuturisticBackground from './components/FuturisticBackground';
 import AdminLoginModal from './components/AdminLoginModal';
+import MouseFollower from './components/MouseFollower';
 
 // Transition variants for the cinematic page switch
 const pageVariants = {
@@ -23,6 +24,7 @@ const pageTransition = { type: "tween", ease: "anticipate", duration: 0.5 };
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
+  console.log("Current Section:", activeSection);
   const [showAdminLogin, setShowAdminLogin] = useState(false);
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
   const mainRef = useRef(null);
@@ -63,6 +65,7 @@ function App() {
   return (
     <div className="relative text-[#1a1a2e] font-sans min-h-screen selection:bg-[#00f0ff]/20 selection:text-[#0070f3] overflow-hidden">
       <FuturisticBackground />
+      <MouseFollower />
 
       <div className="relative z-10 h-screen flex flex-col">
         <Navbar
