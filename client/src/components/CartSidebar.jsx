@@ -6,7 +6,7 @@ const CartSidebar = () => {
   const { cartItems, isCartOpen, toggleCart, removeFromCart, updateQuantity, toggleCheckout } = useCartStore();
 
   const total = cartItems.reduce((sum, item) => {
-    const price = parseFloat(item.price.replace('$', '').replace(',', ''));
+    const price = parseFloat(item.price.replace('₹', '').replace(',', ''));
     return sum + (price * item.quantity);
   }, 0);
 
@@ -71,7 +71,7 @@ const CartSidebar = () => {
                 <div className="flex justify-between items-center mb-6">
                   <span className="text-gray-400">Total</span>
                   <span className="text-2xl font-cyber font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00f0ff] to-[#b026ff]">
-                    ${total.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                    ₹{total.toLocaleString('en-IN')}
                   </span>
                 </div>
                 <button 

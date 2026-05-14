@@ -3,7 +3,7 @@ import { ShoppingCart, LayoutDashboard, Menu, X } from 'lucide-react';
 import { useCartStore } from '../store/useCart';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Navbar = ({ activeSection, setActiveSection }) => {
+const Navbar = ({ activeSection, setActiveSection, onAdminClick, isAdminAuthenticated }) => {
   const navItems = ['Home', 'Buy', 'Learn', 'Building', 'Connections'];
   const { cartItems, toggleCart } = useCartStore();
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
@@ -68,7 +68,7 @@ const Navbar = ({ activeSection, setActiveSection }) => {
 
               {/* Admin Button (desktop only) */}
               <button
-                onClick={() => handleNavClick(isDashboard ? 'home' : 'dashboard')}
+                onClick={onAdminClick}
                 title="Admin Dashboard"
                 className={`hidden md:flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 ${
                   isDashboard
@@ -77,7 +77,7 @@ const Navbar = ({ activeSection, setActiveSection }) => {
                 }`}
               >
                 <LayoutDashboard className="w-4 h-4" />
-                <span className="hidden lg:inline">Admin</span>
+                <span className="hidden lg:inline">{isAdminAuthenticated ? 'Dashboard' : 'Admin'}</span>
               </button>
 
               {/* Mobile Hamburger Button */}
@@ -123,7 +123,7 @@ const Navbar = ({ activeSection, setActiveSection }) => {
 
               {/* Admin in mobile menu */}
               <button
-                onClick={() => handleNavClick(isDashboard ? 'home' : 'dashboard')}
+                onClick={() => { setMobileOpen(false); onAdminClick(); }}
                 className={`w-full text-left px-5 py-4 rounded-2xl text-sm font-bold uppercase tracking-[0.15em] transition-all duration-200 flex items-center gap-3 ${
                   isDashboard
                     ? 'bg-[#b026ff]/20 text-[#b026ff] border border-[#b026ff]/50'
@@ -131,7 +131,7 @@ const Navbar = ({ activeSection, setActiveSection }) => {
                 }`}
               >
                 <LayoutDashboard className="w-4 h-4" />
-                Admin Dashboard
+                {isAdminAuthenticated ? 'Dashboard' : 'Admin Login'}
               </button>
             </div>
           </motion.div>
