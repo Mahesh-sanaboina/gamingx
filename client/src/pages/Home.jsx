@@ -1,129 +1,103 @@
 import { motion } from 'framer-motion';
-import { TypeAnimation } from 'react-type-animation';
 import { ChevronRight, Shield, Zap, Globe2 } from 'lucide-react';
 
 const Home = ({ setActiveSection }) => {
   return (
-    <div className="w-full flex flex-col items-center overflow-y-auto">
+    <div className="w-full flex flex-col items-center">
       
       {/* Hero Section */}
-      <section className="relative w-full min-h-[85vh] flex items-center justify-center perspective-1000 mb-10">
-        <div className="relative z-20 text-center px-4 max-w-6xl mx-auto flex flex-col items-center">
-          
-          {/* Floating Holographic Badge */}
+      <section className="relative w-full min-h-[90vh] flex items-center justify-center mb-20 overflow-hidden">
+        {/* Background Visual Element */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
           <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="mb-8 px-6 py-2 rounded-full glass-panel border border-[#00f0ff]/30 text-[#00f0ff] font-mono text-sm tracking-widest shadow-[0_0_15px_rgba(0,240,255,0.3)] inline-block uppercase"
-          >
-            System Initialized // v2.0.26
-          </motion.div>
+            initial={{ scale: 1.1, opacity: 0 }}
+            animate={{ scale: 1, opacity: 0.4 }}
+            transition={{ duration: 2 }}
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-[40px] scale-105"
+            style={{ backgroundImage: `url('/futuristic_gaming_setup_glow_1778756249257.png')` }} 
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#020205]/60 to-[#020205]" />
+        </div>
 
-          {/* Massive Animated Headline */}
-          <motion.h1 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            className="text-7xl md:text-9xl font-cyber font-black mb-6 tracking-tighter leading-none"
-          >
-            BEYOND <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#b026ff] via-[#ff0055] to-[#00f0ff] drop-shadow-[0_0_30px_rgba(176,38,255,0.8)]">REALITY</span>
-          </motion.h1>
-
-          {/* Typing Subtitle */}
-          <div className="h-12 mb-12">
-            <TypeAnimation
-              sequence={[
-                'The ultimate ecosystem for next-generation hardware.',
-                2000,
-                'Immersive interfaces. Cinematic gaming.',
-                2000,
-                'Experience the future of digital environments.',
-                2000,
-              ]}
-              wrapper="p"
-              speed={50}
-              className="text-xl md:text-2xl text-gray-300 font-light tracking-wide max-w-3xl mx-auto"
-              repeat={Infinity}
-            />
-          </div>
-
-          {/* Action Buttons */}
+        <div className="relative z-20 text-center px-4 max-w-6xl mx-auto">
+          {/* Animated Header */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col sm:flex-row gap-6 relative"
+            transition={{ duration: 1 }}
+            className="space-y-6"
           >
-            {/* Glowing Aura behind button */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#b026ff] to-[#00f0ff] rounded-full blur-xl opacity-50 animate-pulse"></div>
+            <span className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-[0.5em] text-[#00f0ff] animate-pulse">
+              Quantum Protocol Enabled
+            </span>
             
+            <h1 className="text-[clamp(3rem,10vw,8rem)] font-cyber font-black leading-none uppercase">
+              <span className="text-white">ULTRA</span><br/>
+              <span className="glow-text">GAMINGX</span>
+            </h1>
+
+            <p className="text-lg md:text-xl text-gray-400 font-medium tracking-widest max-w-2xl mx-auto uppercase opacity-80">
+              The next generation of luxury digital ecosystems.
+            </p>
+          </motion.div>
+
+          {/* Luxury CTA */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="mt-12"
+          >
             <button 
               onClick={() => setActiveSection('buy')}
-              className="relative cursor-pointer px-12 py-5 bg-black/50 backdrop-blur-md border border-white/20 hover:border-[#00f0ff] text-white font-bold rounded-full transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,240,255,0.6)] text-lg tracking-[0.2em] overflow-hidden group flex items-center justify-center gap-4"
+              className="group relative px-12 py-5 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 active:scale-95"
             >
-              <span className="relative z-10 group-hover:text-[#00f0ff] transition-colors">INITIALIZE PROTOCOL</span>
-              <ChevronRight className="w-5 h-5 relative z-10 group-hover:text-[#00f0ff] transition-colors group-hover:translate-x-2" />
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#b026ff] to-[#00f0ff] opacity-80" />
+              <div className="absolute inset-[2px] bg-black rounded-[14px] flex items-center justify-center gap-3 transition-colors group-hover:bg-transparent">
+                <span className="relative z-10 text-white font-black text-xs uppercase tracking-[0.3em]">Enter Universe</span>
+                <ChevronRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
+              </div>
+              {/* Animated Inner Glow */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
             </button>
           </motion.div>
+        </div>
 
+        {/* Floating Decorative Elements */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-20 hidden md:block">
+          <div className="w-[1px] h-20 bg-gradient-to-b from-[#00f0ff] to-transparent" />
         </div>
       </section>
 
-      {/* New Information Section (Below Hero) */}
-      <section className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-32 z-20">
+      {/* Luxury Feature Grid */}
+      <section className="w-full max-w-7xl mx-auto px-4 pb-32">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="glass-panel p-10 rounded-3xl border border-white/5 hover:border-[#00f0ff]/50 hover:shadow-[0_0_30px_rgba(0,240,255,0.2)] transition-all duration-500 group relative overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-[#00f0ff]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <Zap className="w-12 h-12 text-[#00f0ff] mb-6 group-hover:scale-110 transition-transform duration-500" />
-            <h3 className="text-2xl font-bold font-sans text-white mb-4 tracking-wide">Next-Gen Hardware</h3>
-            <p className="text-gray-400 font-light leading-relaxed">
-              Equip yourself with the most advanced processors and graphics architectures on the planet. Built for zero latency and maximum framerates.
-            </p>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="glass-panel p-10 rounded-3xl border border-white/5 hover:border-[#b026ff]/50 hover:shadow-[0_0_30px_rgba(176,38,255,0.2)] transition-all duration-500 group relative overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-[#b026ff]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <Shield className="w-12 h-12 text-[#b026ff] mb-6 group-hover:scale-110 transition-transform duration-500" />
-            <h3 className="text-2xl font-bold font-sans text-white mb-4 tracking-wide">Pro Blueprints</h3>
-            <p className="text-gray-400 font-light leading-relaxed">
-              Access classified build guides and streaming setups used by top-tier professionals. Learn how to construct the ultimate battlestation.
-            </p>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="glass-panel p-10 rounded-3xl border border-white/5 hover:border-[#ff0055]/50 hover:shadow-[0_0_30px_rgba(255,0,85,0.2)] transition-all duration-500 group relative overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-[#ff0055]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <Globe2 className="w-12 h-12 text-[#ff0055] mb-6 group-hover:scale-110 transition-transform duration-500" />
-            <h3 className="text-2xl font-bold font-sans text-white mb-4 tracking-wide">Global Syndicate</h3>
-            <p className="text-gray-400 font-light leading-relaxed">
-              Connect with thousands of elite gamers in our secure network. Join live tournaments, find squads, and access exclusive hardware drops.
-            </p>
-          </motion.div>
-
+          {[
+            { icon: Zap, title: "MAX ARCHITECTURE", desc: "Military grade hardware blueprints for elite performance.", color: "from-[#00f0ff]" },
+            { icon: Shield, title: "SECURE PROTOCOL", desc: "Private encrypted network for global syndicate connections.", color: "from-[#b026ff]" },
+            { icon: Globe2, title: "GLOBAL NETWORK", desc: "High-speed low latency infrastructure for pro-level gaming.", color: "from-[#ff0055]" }
+          ].map((feature, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.2 }}
+              className="glass-card p-10 rounded-[2.5rem] group"
+            >
+              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.color} to-transparent p-[1px] mb-8`}>
+                <div className="w-full h-full bg-[#080810] rounded-2xl flex items-center justify-center transition-colors group-hover:bg-transparent">
+                  <feature.icon className="w-6 h-6 text-white" />
+                </div>
+              </div>
+              <h3 className="text-xl font-black text-white mb-4 tracking-widest uppercase">{feature.title}</h3>
+              <p className="text-gray-500 text-sm font-medium leading-relaxed uppercase tracking-tight">
+                {feature.desc}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </section>
-
     </div>
   );
 };

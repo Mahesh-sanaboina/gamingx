@@ -9,7 +9,7 @@ import Connections from './pages/Connections';
 import AdminDashboard from './pages/AdminDashboard';
 import CartSidebar from './components/CartSidebar';
 import CheckoutModal from './components/CheckoutModal';
-import AnimatedBackground from './components/AnimatedBackground';
+import FuturisticBackground from './components/FuturisticBackground';
 import AdminLoginModal from './components/AdminLoginModal';
 
 // Transition variants for the cinematic page switch
@@ -34,17 +34,14 @@ function App() {
     }
   }, [activeSection]);
 
-  // Handle admin button click — show login modal if not authenticated
   const handleAdminClick = () => {
     if (isAdminAuthenticated) {
-      // Already logged in — toggle between dashboard and home
       setActiveSection(prev => prev === 'dashboard' ? 'home' : 'dashboard');
     } else {
       setShowAdminLogin(true);
     }
   };
 
-  // Called when admin login succeeds
   const handleAdminLoginSuccess = () => {
     setIsAdminAuthenticated(true);
     setShowAdminLogin(false);
@@ -64,9 +61,8 @@ function App() {
   };
 
   return (
-    <div className="relative text-white font-sans min-h-screen selection:bg-[#00f0ff]/30 selection:text-[#00f0ff] overflow-hidden bg-[#030014]">
-      
-      <AnimatedBackground />
+    <div className="relative text-white font-sans min-h-screen selection:bg-[#00f0ff]/30 selection:text-[#00f0ff] overflow-hidden">
+      <FuturisticBackground />
 
       <div className="relative z-10 h-screen flex flex-col">
         <Navbar
@@ -84,7 +80,7 @@ function App() {
         />
 
         {/* Main Content Area */}
-        <main ref={mainRef} className="flex-1 overflow-y-auto overflow-x-hidden pt-20 pb-12 scroll-smooth">
+        <main ref={mainRef} className="flex-1 overflow-y-auto overflow-x-hidden pt-20 pb-12 scroll-smooth custom-scrollbar">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeSection}
@@ -93,9 +89,11 @@ function App() {
               exit="out"
               variants={pageVariants}
               transition={pageTransition}
-              className="min-h-full flex items-center justify-center w-full"
+              className="min-h-full flex items-center justify-center w-full px-4 sm:px-6 lg:px-8"
             >
-              {renderSection()}
+              <div className="w-full max-w-7xl mx-auto py-8">
+                {renderSection()}
+              </div>
             </motion.div>
           </AnimatePresence>
         </main>
