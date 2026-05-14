@@ -61,7 +61,7 @@ function App() {
   };
 
   return (
-    <div className="relative text-white font-sans min-h-screen selection:bg-[#00f0ff]/30 selection:text-[#00f0ff] overflow-hidden">
+    <div className="relative text-[#1a1a2e] font-sans min-h-screen selection:bg-[#00f0ff]/20 selection:text-[#0070f3] overflow-hidden">
       <FuturisticBackground />
 
       <div className="relative z-10 h-screen flex flex-col">

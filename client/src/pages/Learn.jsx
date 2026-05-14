@@ -2,10 +2,10 @@ import { motion } from 'framer-motion';
 import { PlayCircle, Youtube, Tv, Radio } from 'lucide-react';
 
 const videos = [
-  { id: 1, title: "Cyberpunk 2077 Mastery", embedId: "8X2kIfS6fb8", category: "Gameplay" }, 
-  { id: 2, title: "Valorant Pro Tactics", embedId: "e_E9W2vsRbQ", category: "Esports" },
-  { id: 3, title: "GTA VI Cinematic", embedId: "QdBZY2fkU-0", category: "Trailer" },
-  { id: 4, title: "Elden Ring Strategy", embedId: "qLZenOn7WUo", category: "Walkthrough" },
+  { id: 1, title: "Cyberpunk Mastery", embedId: "8X2kIfS6fb8", category: "Gameplay" }, 
+  { id: 2, title: "Valorant Tactics", embedId: "e_E9W2vsRbQ", category: "Esports" },
+  { id: 3, title: "GTA VI Ethereal", embedId: "QdBZY2fkU-0", category: "Trailer" },
+  { id: 4, title: "Elden Ring Path", embedId: "qLZenOn7WUo", category: "Walkthrough" },
 ];
 
 const Learn = () => {
@@ -17,14 +17,14 @@ const Learn = () => {
           animate={{ opacity: 1, y: 0 }}
           className="space-y-4"
         >
-          <span className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-[0.4em] text-[#ff0055]">
-            Gaming Academy // 2026
+          <span className="px-4 py-1.5 rounded-full bg-white/40 border border-white/60 text-[10px] font-black uppercase tracking-[0.4em] text-[#ff0055] shadow-sm">
+            Ethereal Academy // 2026
           </span>
           <h2 className="text-5xl md:text-7xl font-cyber font-black glow-text uppercase">
-            SYNDICATE
+            LEARN
           </h2>
           <p className="text-gray-500 font-medium tracking-widest uppercase text-xs">
-            Learn from the masters. dominate the network.
+            Master the modern digital landscape.
           </p>
         </motion.div>
       </div>
@@ -48,13 +48,12 @@ const Learn = () => {
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
-                  className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700"
+                  className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700"
                 ></iframe>
                 
-                {/* Visual Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute top-4 left-4">
-                   <div className="px-3 py-1 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-[8px] font-black uppercase tracking-widest text-white">
+                   <div className="px-3 py-1 rounded-full bg-white/60 backdrop-blur-md border border-white/80 text-[8px] font-black uppercase tracking-widest text-[#1a1a2e] shadow-sm">
                      {video.category}
                    </div>
                 </div>
@@ -62,25 +61,24 @@ const Learn = () => {
 
             <div className="p-8">
               <div className="flex justify-between items-center">
-                <h3 className="text-xl font-black text-white uppercase tracking-wider group-hover:text-[#00f0ff] transition-colors">{video.title}</h3>
-                <PlayCircle className="w-6 h-6 text-gray-600 group-hover:text-white transition-colors" />
+                <h3 className="text-xl font-black text-[#1a1a2e] uppercase tracking-wider group-hover:text-[#0070f3] transition-colors">{video.title}</h3>
+                <PlayCircle className="w-6 h-6 text-gray-300 group-hover:text-[#0070f3] transition-colors" />
               </div>
             </div>
           </motion.div>
         ))}
       </div>
 
-      {/* Live Channels */}
       <div className="mt-20 w-full max-w-7xl px-4">
          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
-              { icon: Youtube, label: "Official Channel", color: "text-red-500" },
-              { icon: Tv, label: "Live Broadcast", color: "text-[#00f0ff]" },
+              { icon: Youtube, label: "Ethereal Channel", color: "text-red-500" },
+              { icon: Tv, label: "Live Broadcast", color: "text-[#0070f3]" },
               { icon: Radio, label: "Syndicate Radio", color: "text-[#b026ff]" }
             ].map((item, i) => (
-              <div key={i} className="glass-card p-8 rounded-3xl flex items-center gap-6 hover:border-white/20 transition-all cursor-pointer">
+              <div key={i} className="glass-card p-8 rounded-3xl flex items-center gap-6 hover:border-[#0070f3]/30 transition-all cursor-pointer">
                 <item.icon className={`w-8 h-8 ${item.color}`} />
-                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white">{item.label}</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#1a1a2e]">{item.label}</span>
               </div>
             ))}
          </div>

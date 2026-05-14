@@ -5,10 +5,10 @@ import confetti from 'canvas-confetti';
 import { useCartStore } from '../store/useCart';
 
 const paymentMethods = [
-  { id: 'card',    label: 'Credit / Debit Card', icon: CreditCard,  color: '#00f0ff' },
+  { id: 'card',    label: 'Credit / Debit Card', icon: CreditCard,  color: '#0070f3' },
   { id: 'upi',     label: 'UPI Payment',          icon: Smartphone,  color: '#b026ff' },
   { id: 'netbank', label: 'Net Banking',           icon: Building2,   color: '#ff9900' },
-  { id: 'wallet',  label: 'Wallets',               icon: Wallet,      color: '#25D366' },
+  { id: 'wallet',  label: 'Wallets',               icon: Wallet,      color: '#22c55e' },
   { id: 'cod',     label: 'Cash on Delivery',      icon: Truck,       color: '#ff0055' },
 ];
 
@@ -30,14 +30,12 @@ const wallets = [
 const CheckoutModal = () => {
   const { isCheckoutOpen, toggleCheckout, clearCart, cartItems } = useCartStore();
   
-  // UI States
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [processingStep, setProcessingStep] = useState(0);
   const [activeMethod, setActiveMethod] = useState('card');
   
-  // Form States
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -67,14 +65,11 @@ const CheckoutModal = () => {
 
   const validateForm = () => {
     let newErrors = {};
-    
-    // Global Fields
     if (!formData.fullName.trim()) newErrors.fullName = "Full Name is required";
     if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) newErrors.email = "Valid email is required";
     if (!formData.phone.match(/^\d{10}$/)) newErrors.phone = "Valid 10-digit phone number is required";
     if (!formData.address.trim()) newErrors.address = "Delivery address is required";
 
-    // Method Specific Fields
     if (activeMethod === 'card') {
       if (!formData.cardNumber.match(/^\d{16,19}$/)) newErrors.cardNumber = "Enter valid card number";
       if (!formData.expiry.match(/^(0[1-9]|1[0-2])\/\d{2}$/)) newErrors.expiry = "Use MM/YY format";
@@ -95,15 +90,11 @@ const CheckoutModal = () => {
 
   const handlePayment = (e) => {
     e.preventDefault();
-    
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
 
     setIsProcessing(true);
     setIsError(false);
     
-    // Simulate realistic processing steps
     let currentStep = 0;
     const interval = setInterval(() => {
       currentStep++;
@@ -111,10 +102,7 @@ const CheckoutModal = () => {
         setProcessingStep(currentStep);
       } else {
         clearInterval(interval);
-        
-        // Random failure simulation (5% chance)
         const isSuccessful = Math.random() > 0.05;
-        
         setIsProcessing(false);
         if (isSuccessful) {
           setIsSuccess(true);
@@ -122,7 +110,7 @@ const CheckoutModal = () => {
             particleCount: 150, 
             spread: 80, 
             origin: { y: 0.6 }, 
-            colors: ['#b026ff', '#00f0ff', '#ff0055', '#ffdd00'] 
+            colors: ['#0070f3', '#b026ff', '#ff0055', '#ffdd00'] 
           });
         } else {
           setIsError(true);
@@ -143,22 +131,19 @@ const CheckoutModal = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error when user types
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: null }));
-    }
+    if (errors[name]) setErrors(prev => ({ ...prev, [name]: null }));
   };
 
   const InputField = ({ label, name, placeholder, type = "text", maxLength, className = "" }) => (
     <div className={className}>
-      <label className="block text-[10px] text-gray-500 mb-1 uppercase tracking-[0.15em] font-bold">{label}</label>
+      <label className="block text-[10px] text-gray-400 mb-1 uppercase tracking-[0.15em] font-bold">{label}</label>
       <input
         name={name}
         type={type}
         maxLength={maxLength}
         value={formData[name]}
         onChange={handleInputChange}
-        className={`w-full bg-black/40 border ${errors[name] ? 'border-red-500 shadow-[0_0_10px_rgba(239,68,68,0.2)]' : 'border-white/10'} rounded-xl p-3 text-sm text-white focus:outline-none focus:border-[#00f0ff] transition-all placeholder:text-gray-700`}
+        className={`w-full bg-white/50 border ${errors[name] ? 'border-red-500' : 'border-black/5'} rounded-xl p-3 text-sm text-[#1a1a2e] focus:outline-none focus:border-[#0070f3] transition-all placeholder:text-gray-300 shadow-sm`}
         placeholder={placeholder}
       />
       {errors[name] && <span className="text-[10px] text-red-500 mt-1 block font-medium">⚠️ {errors[name]}</span>}
@@ -177,263 +162,186 @@ const CheckoutModal = () => {
             </div>
           </div>
         );
-
       case 'upi':
         return (
           <div className="space-y-4">
-            <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-3">Popular UPI Apps</p>
+            <p className="text-[10px] text-gray-400 uppercase tracking-widest mb-3">Popular UPI Apps</p>
             <div className="grid grid-cols-2 gap-3 mb-4">
               {upiApps.map(app => (
                 <button key={app.name} type="button" onClick={() => setFormData(p => ({...p, upiId: app.name.toLowerCase() + '@upi'}))}
-                  className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${formData.upiId.startsWith(app.name.toLowerCase()) ? 'border-[#b026ff] bg-[#b026ff]/10' : 'border-white/10 bg-black/30'}`}>
+                  className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${formData.upiId.startsWith(app.name.toLowerCase()) ? 'border-[#b026ff] bg-[#b026ff]/5' : 'border-black/5 bg-white/40'}`}>
                   <span className="text-xl">{app.emoji}</span>
-                  <span className="text-xs font-bold text-white">{app.name}</span>
+                  <span className="text-xs font-bold text-[#1a1a2e]">{app.name}</span>
                 </button>
               ))}
             </div>
             <InputField label="UPI ID" name="upiId" placeholder="yourname@bank" />
           </div>
         );
-
       case 'netbank':
         return (
           <div className="space-y-4">
             <div>
-              <label className="block text-[10px] text-gray-500 mb-1 uppercase tracking-widest font-bold">Select Bank</label>
+              <label className="block text-[10px] text-gray-400 mb-1 uppercase tracking-widest font-bold">Select Bank</label>
               <select 
                 name="bank"
                 value={formData.bank}
                 onChange={handleInputChange}
-                className={`w-full bg-black/40 border ${errors.bank ? 'border-red-500' : 'border-white/10'} rounded-xl p-3 text-sm text-white focus:outline-none focus:border-[#ff9900] appearance-none`}
+                className={`w-full bg-white/40 border ${errors.bank ? 'border-red-500' : 'border-black/5'} rounded-xl p-3 text-sm text-[#1a1a2e] focus:outline-none focus:border-[#0070f3] appearance-none shadow-sm`}
               >
-                <option value="" className="bg-[#080810]">-- Select Bank --</option>
-                {banks.map(b => <option key={b} value={b} className="bg-[#080810]">{b}</option>)}
+                <option value="">-- Select Bank --</option>
+                {banks.map(b => <option key={b} value={b}>{b}</option>)}
               </select>
-            </div>
-            <div className="p-4 rounded-xl bg-orange-500/5 border border-orange-500/20 text-[11px] text-orange-400 flex gap-3">
-              <AlertCircle className="w-4 h-4 flex-shrink-0" />
-              <span>You will be redirected to the bank's secure site for authentication.</span>
             </div>
           </div>
         );
-
       case 'wallet':
         return (
           <div className="space-y-3">
             {wallets.map(w => (
               <button key={w.name} type="button" onClick={() => setFormData(p => ({...p, wallet: w.name}))}
-                className={`w-full flex items-center gap-4 p-4 rounded-xl border transition-all ${formData.wallet === w.name ? 'border-[#25D366] bg-[#25D366]/10' : 'border-white/10 bg-black/30'}`}>
+                className={`w-full flex items-center gap-4 p-4 rounded-xl border transition-all ${formData.wallet === w.name ? 'border-[#22c55e] bg-[#22c55e]/5' : 'border-black/5 bg-white/40'}`}>
                 <span className="text-xl">{w.emoji}</span>
-                <span className="font-bold text-white text-sm">{w.name}</span>
-                {formData.wallet === w.name && <ShieldCheck className="ml-auto text-[#25D366] w-5 h-5" />}
+                <span className="font-bold text-[#1a1a2e] text-sm">{w.name}</span>
+                {formData.wallet === w.name && <ShieldCheck className="ml-auto text-[#22c55e] w-5 h-5" />}
               </button>
             ))}
           </div>
         );
-
       case 'cod':
         return (
           <div className="space-y-4">
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 text-center">
-              <Truck className="w-10 h-10 text-gray-400 mx-auto mb-3" />
-              <h4 className="text-sm font-bold text-white mb-2">Cash on Delivery</h4>
-              <p className="text-gray-500 text-[11px]">Payment is required at the time of delivery. A verification call may be placed before shipping.</p>
+            <div className="p-6 rounded-2xl bg-black/5 border border-black/5 text-center">
+              <Truck className="w-10 h-10 text-gray-300 mx-auto mb-3" />
+              <h4 className="text-sm font-bold text-[#1a1a2e] mb-2">Cash on Delivery</h4>
+              <p className="text-gray-400 text-[11px]">Payment is required at the time of delivery.</p>
             </div>
           </div>
         );
-
       default: return null;
     }
   };
-
-  const activeColor = paymentMethods.find(m => m.id === activeMethod)?.color || '#00f0ff';
 
   return (
     <AnimatePresence>
       {isCheckoutOpen && (
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/95 backdrop-blur-xl z-[80] flex items-center justify-center p-2 sm:p-4"
+          className="fixed inset-0 bg-white/40 backdrop-blur-2xl z-[80] flex items-center justify-center p-2 sm:p-4"
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0, y: 30 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 30 }}
-            className="bg-[#080810] border border-white/10 rounded-2xl sm:rounded-[2.5rem] w-full max-w-4xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto shadow-[0_0_100px_rgba(0,0,0,0.8)] relative custom-scrollbar"
+            className="bg-white border border-white/80 rounded-[2.5rem] w-full max-w-4xl max-h-[90vh] overflow-y-auto shadow-[0_20px_100px_rgba(0,0,0,0.1)] relative custom-scrollbar"
           >
             {isProcessing ? (
-              <div className="p-8 sm:p-20 flex flex-col items-center justify-center text-center min-h-[400px]">
-                <div className="relative w-24 h-24 sm:w-40 sm:h-40 mb-8 sm:mb-12">
+              <div className="p-20 flex flex-col items-center justify-center text-center">
+                <div className="relative w-40 h-40 mb-12">
                   <motion.div 
                     animate={{ rotate: 360 }}
                     transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-0 border-[4px] sm:border-[6px] border-t-[#00f0ff] border-r-transparent border-b-[#b026ff] border-l-transparent rounded-full"
+                    className="absolute inset-0 border-[6px] border-t-[#0070f3] border-r-transparent border-b-[#b026ff] border-l-transparent rounded-full"
                   />
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <Loader2 className="w-8 h-8 sm:w-12 sm:h-12 text-white animate-spin opacity-20" />
+                    <Loader2 className="w-12 h-12 text-[#1a1a2e] animate-spin opacity-10" />
                   </div>
-                  <motion.div 
-                    animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.6, 0.3] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="absolute inset-0 bg-gradient-to-tr from-[#00f0ff]/20 to-[#b026ff]/20 rounded-full blur-xl"
-                  />
                 </div>
-
                 <AnimatePresence mode="wait">
-                  <motion.div
-                    key={processingStep}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="space-y-2 sm:space-y-4 px-4"
-                  >
-                    <h3 className="text-lg sm:text-2xl font-cyber font-bold tracking-widest text-white uppercase">{steps[processingStep]}</h3>
-                    <p className="text-gray-500 font-mono text-[8px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.3em] uppercase">PCI DSS Compliant Gateway Level 1</p>
+                  <motion.div key={processingStep} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-4">
+                    <h3 className="text-2xl font-black tracking-widest text-[#1a1a2e] uppercase">{steps[processingStep]}</h3>
+                    <p className="text-gray-400 font-black text-[10px] tracking-[0.3em] uppercase">Ethereal Secure Payment Node</p>
                   </motion.div>
                 </AnimatePresence>
-                
-                <div className="w-full max-w-xs sm:max-w-md h-1 bg-white/5 rounded-full overflow-hidden mt-8 sm:mt-12">
-                  <motion.div 
-                    initial={{ width: "0%" }}
-                    animate={{ width: `${((processingStep + 1) / steps.length) * 100}%` }}
-                    className="h-full bg-gradient-to-r from-[#b026ff] to-[#00f0ff]"
-                  />
-                </div>
               </div>
             ) : isSuccess ? (
-              <div className="p-10 sm:p-16 flex flex-col items-center justify-center text-center">
-                <div className="w-16 h-16 sm:w-24 sm:h-24 bg-green-500/10 border border-green-500/30 rounded-full flex items-center justify-center mb-6 sm:mb-8 shadow-[0_0_30px_rgba(34,197,94,0.2)]">
-                  <CheckCircle className="w-8 h-8 sm:w-12 sm:h-12 text-green-500" />
+              <div className="p-16 flex flex-col items-center justify-center text-center">
+                <div className="w-24 h-24 bg-green-500/10 border border-green-500/30 rounded-full flex items-center justify-center mb-8 shadow-lg">
+                  <CheckCircle className="w-12 h-12 text-green-500" />
                 </div>
-                <h2 className="text-2xl sm:text-4xl font-cyber font-bold mb-4 text-white uppercase tracking-widest">Payment Successful</h2>
-                <p className="text-gray-400 mb-8 sm:mb-10 max-w-md text-sm sm:text-base">Your transaction has been verified. Order confirmation has been sent to your email.</p>
-                <button 
-                  onClick={handleFinalClose}
-                  className="px-8 sm:px-12 py-3 sm:py-4 bg-white text-black font-black uppercase tracking-widest rounded-full hover:scale-105 transition-transform text-xs sm:text-sm"
-                >
-                  Continue
-                </button>
+                <h2 className="text-4xl font-black mb-4 text-[#1a1a2e] uppercase tracking-widest">Payment Success</h2>
+                <p className="text-gray-400 mb-10 max-w-md">Your modern transaction has been verified. Check your email for details.</p>
+                <button onClick={handleFinalClose} className="px-12 py-4 bg-[#1a1a2e] text-white font-black uppercase tracking-widest rounded-full hover:bg-[#0070f3] transition-all">Continue</button>
               </div>
             ) : isError ? (
-              <div className="p-10 sm:p-16 flex flex-col items-center justify-center text-center">
-                <div className="w-16 h-16 sm:w-24 sm:h-24 bg-red-500/10 border border-red-500/30 rounded-full flex items-center justify-center mb-6 sm:mb-8 shadow-[0_0_30px_rgba(239,68,68,0.2)]">
-                  <AlertCircle className="w-8 h-8 sm:w-12 sm:h-12 text-red-500" />
+              <div className="p-16 flex flex-col items-center justify-center text-center">
+                <div className="w-24 h-24 bg-red-500/10 border border-red-500/30 rounded-full flex items-center justify-center mb-8 shadow-lg">
+                  <AlertCircle className="w-12 h-12 text-red-500" />
                 </div>
-                <h2 className="text-2xl sm:text-4xl font-cyber font-bold mb-4 text-white uppercase tracking-widest">Payment Failed</h2>
-                <p className="text-gray-400 mb-8 sm:mb-10 max-w-md text-sm sm:text-base">Transaction could not be verified by your bank. Please check your details and try again.</p>
-                <button 
-                  onClick={() => { setIsError(false); setIsProcessing(false); }}
-                  className="px-8 sm:px-12 py-3 sm:py-4 border-2 border-white/10 text-white font-black uppercase tracking-widest rounded-full hover:bg-white/5 transition-colors text-xs sm:text-sm"
-                >
-                  Retry Transaction
-                </button>
+                <h2 className="text-4xl font-black mb-4 text-[#1a1a2e] uppercase tracking-widest">Payment Failed</h2>
+                <button onClick={() => setIsError(false)} className="px-12 py-4 border-2 border-black/10 text-[#1a1a2e] font-black uppercase tracking-widest rounded-full hover:bg-black/5 transition-all">Retry</button>
               </div>
             ) : (
               <div className="flex flex-col lg:flex-row">
-                {/* Left Side: Order & Summary */}
-                <div className="lg:w-[40%] bg-white/[0.02] p-6 sm:p-10 border-b lg:border-b-0 lg:border-r border-white/5 flex flex-col">
-                  <div className="flex items-center gap-4 mb-8 sm:mb-10">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-[#b026ff] to-[#00f0ff] p-[1px]">
-                      <div className="w-full h-full bg-[#080810] rounded-xl sm:rounded-2xl flex items-center justify-center">
-                        <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                      </div>
-                    </div>
-                    <div>
-                      <h2 className="text-base sm:text-lg font-bold text-white tracking-tight">Secure Checkout</h2>
-                      <p className="text-[8px] sm:text-[10px] text-gray-500 uppercase tracking-widest">Order Summary</p>
-                    </div>
+                {/* Summary */}
+                <div className="lg:w-[40%] bg-black/[0.02] p-10 border-r border-black/5 flex flex-col">
+                  <div className="flex items-center gap-4 mb-10">
+                     <ShieldCheck className="w-8 h-8 text-[#0070f3]" />
+                     <div>
+                       <h2 className="text-lg font-black text-[#1a1a2e] uppercase tracking-tight">Checkout</h2>
+                       <p className="text-[10px] text-gray-400 uppercase tracking-widest">Secure Gateway</p>
+                     </div>
                   </div>
-
-                  <div className="flex-1 space-y-4 sm:space-y-6 max-h-[150px] lg:max-h-none overflow-y-auto pr-2 custom-scrollbar mb-6">
+                  <div className="flex-1 space-y-6 overflow-y-auto mb-6 pr-2 custom-scrollbar">
                     {cartItems.map(item => (
                       <div key={item.id} className="flex gap-4">
-                        <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-lg sm:rounded-xl bg-black overflow-hidden border border-white/5">
-                          <img src={item.image} alt={item.name} className="w-full h-full object-cover opacity-60" />
+                        <div className="w-16 h-16 rounded-xl bg-gray-100 overflow-hidden border border-black/5">
+                          <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <h4 className="text-[10px] sm:text-xs font-bold text-gray-200 truncate uppercase tracking-wider">{item.name}</h4>
-                          <p className="text-[9px] sm:text-[10px] text-gray-500">Qty: {item.quantity}</p>
-                          <p className="text-[10px] sm:text-xs font-mono text-[#00f0ff] mt-1">{item.price}</p>
+                        <div className="flex-1">
+                          <h4 className="text-xs font-black text-[#1a1a2e] uppercase tracking-wider">{item.name}</h4>
+                          <p className="text-[10px] text-gray-400">Qty: {item.quantity}</p>
+                          <p className="text-xs font-black text-[#0070f3] mt-1">{item.price}</p>
                         </div>
                       </div>
                     ))}
                   </div>
-
-                  <div className="mt-auto pt-6 border-t border-white/5 space-y-3 sm:space-y-4">
-                    <div className="flex justify-between items-center text-gray-500 text-[10px] sm:text-xs">
+                  <div className="mt-auto pt-6 border-t border-black/5 space-y-4">
+                    <div className="flex justify-between items-center text-gray-400 text-xs uppercase tracking-widest">
                       <span>Subtotal</span>
-                      <span className="font-mono">₹{total.toLocaleString('en-IN')}</span>
-                    </div>
-                    <div className="flex justify-between items-center text-gray-500 text-[10px] sm:text-xs">
-                      <span>Shipping</span>
-                      <span className="text-green-500 uppercase font-black text-[8px] sm:text-[9px] tracking-widest">Free</span>
+                      <span>₹{total.toLocaleString('en-IN')}</span>
                     </div>
                     <div className="flex justify-between items-center pt-2">
-                      <span className="text-white font-bold text-xs sm:text-sm uppercase tracking-widest">Total Amount</span>
-                      <span className="text-xl sm:text-2xl font-mono font-black text-white">₹{total.toLocaleString('en-IN')}</span>
+                      <span className="text-[#1a1a2e] font-black text-sm uppercase tracking-widest">Total Amount</span>
+                      <span className="text-2xl font-black text-[#1a1a2e]">₹{total.toLocaleString('en-IN')}</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Right Side: Form */}
-                <div className="lg:w-[60%] p-6 sm:p-10 flex flex-col">
-                  <div className="flex justify-between items-center mb-6 sm:mb-8">
-                    <div className="flex gap-2 overflow-x-auto pb-2 custom-scrollbar">
+                {/* Form */}
+                <div className="lg:w-[60%] p-10 flex flex-col">
+                  <div className="flex justify-between items-center mb-8">
+                    <div className="flex gap-2">
                       {paymentMethods.map(m => {
                         const Icon = m.icon;
                         return (
-                          <button
-                            key={m.id}
-                            type="button"
-                            onClick={() => { setActiveMethod(m.id); setErrors({}); }}
-                            className={`p-2 sm:p-3 rounded-lg sm:rounded-xl border transition-all flex-shrink-0 ${activeMethod === m.id ? 'border-white/20 bg-white/5 text-white shadow-lg' : 'border-transparent text-gray-600 hover:text-gray-400'}`}
-                          >
-                            <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                          <button key={m.id} onClick={() => setActiveMethod(m.id)}
+                            className={`p-3 rounded-xl border transition-all ${activeMethod === m.id ? 'border-[#1a1a2e] bg-[#1a1a2e] text-white shadow-md' : 'border-black/5 text-gray-400 hover:text-[#1a1a2e]'}`}>
+                            <Icon className="w-5 h-5" />
                           </button>
                         );
                       })}
                     </div>
-                    <button onClick={toggleCheckout} className="p-2 hover:bg-white/5 rounded-full text-gray-600 transition-colors flex-shrink-0">
-                      <X className="w-4 h-4 sm:w-5 sm:h-5" />
-                    </button>
+                    <button onClick={toggleCheckout} className="p-2 hover:bg-black/5 rounded-full text-gray-400"><X /></button>
                   </div>
 
-                  <form onSubmit={handlePayment} className="flex-1 space-y-4 sm:space-y-6">
+                  <form onSubmit={handlePayment} className="flex-1 space-y-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <InputField label="Full Name" name="fullName" placeholder="Enter your full name" />
-                      <InputField label="Email Address" name="email" placeholder="you@example.com" type="email" />
+                      <InputField label="Full Name" name="fullName" placeholder="Mahesh S" />
+                      <InputField label="Email" name="email" placeholder="mahesh@nexus.com" type="email" />
                     </div>
-                    
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <InputField label="Phone Number" name="phone" placeholder="10-digit mobile number" maxLength={10} />
-                      <InputField label="Delivery Address" name="address" placeholder="Full shipping address" />
+                      <InputField label="Phone" name="phone" placeholder="9876543210" maxLength={10} />
+                      <InputField label="Address" name="address" placeholder="123 Modern Lane" />
                     </div>
-
-                    <div className="pt-4 border-t border-white/5">
-                      <AnimatePresence mode="wait">
-                        <motion.div
-                          key={activeMethod}
-                          initial={{ opacity: 0, x: 10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          exit={{ opacity: 0, x: -10 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          {renderPaymentForm()}
-                        </motion.div>
-                      </AnimatePresence>
+                    <div className="pt-4 border-t border-black/5">
+                      {renderPaymentForm()}
                     </div>
-
-                    <button
-                      type="submit"
-                      className="w-full py-4 sm:py-5 rounded-xl sm:rounded-2xl bg-white text-black font-black uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[10px] sm:text-xs hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_20px_40px_rgba(255,255,255,0.1)] mt-auto"
-                    >
-                      Process Payment • ₹{total.toLocaleString('en-IN')}
+                    <button type="submit" className="w-full py-5 rounded-2xl bg-[#1a1a2e] text-white font-black uppercase tracking-[0.3em] text-[10px] hover:bg-[#0070f3] transition-all shadow-xl mt-auto">
+                      Confirm Purchase • ₹{total.toLocaleString('en-IN')}
                     </button>
-                    
-                    <div className="flex items-center justify-center gap-4 pt-4 opacity-30 grayscale hover:grayscale-0 transition-all">
-                      <div className="h-[1px] flex-1 bg-white/10" />
-                      <span className="text-[7px] sm:text-[8px] uppercase tracking-[0.3em] sm:tracking-[0.5em] font-black text-white">SSL Encrypted</span>
-                      <div className="h-[1px] flex-1 bg-white/10" />
+                    <div className="flex items-center justify-center gap-4 pt-4 opacity-20 grayscale hover:grayscale-0 transition-all">
+                       <span className="text-[8px] uppercase tracking-[0.5em] font-black text-[#1a1a2e]">Ethereal SSL Protocol</span>
                     </div>
                   </form>
                 </div>

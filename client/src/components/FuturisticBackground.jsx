@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { motion, useSpring, useMotionValue } from 'framer-motion';
+import { useEffect } from 'react';
 
 const FuturisticBackground = () => {
   const mouseX = useMotionValue(0);
@@ -20,32 +20,32 @@ const FuturisticBackground = () => {
   }, [mouseX, mouseY]);
 
   return (
-    <div className="fixed inset-0 -z-50 overflow-hidden bg-[#020205]">
-      {/* Base Gradient Layer */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#050510] via-[#0a0a20] to-[#050510]" />
+    <div className="fixed inset-0 -z-50 overflow-hidden bg-[#f0f4ff]">
+      {/* Base Light Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#ffffff] via-[#f0f7ff] to-[#ffffff]" />
 
-      {/* Animated Aurora Waves */}
+      {/* Animated Ethereal Aurora Waves */}
       <motion.div 
         animate={{ 
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3],
-          rotate: [0, 5, 0]
+          scale: [1, 1.3, 1],
+          opacity: [0.2, 0.4, 0.2],
+          rotate: [0, 10, 0]
+        }}
+        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -top-[30%] -left-[20%] w-[150%] h-[150%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-200/40 via-transparent to-transparent blur-[150px]"
+      />
+      <motion.div 
+        animate={{ 
+          scale: [1.3, 1, 1.3],
+          opacity: [0.15, 0.3, 0.15],
+          rotate: [0, -10, 0]
         }}
         transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-[20%] -left-[10%] w-[120%] h-[120%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-600/20 via-transparent to-transparent blur-[120px]"
-      />
-      <motion.div 
-        animate={{ 
-          scale: [1.2, 1, 1.2],
-          opacity: [0.2, 0.4, 0.2],
-          rotate: [0, -5, 0]
-        }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -bottom-[20%] -right-[10%] w-[120%] h-[120%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-600/20 via-transparent to-transparent blur-[120px]"
+        className="absolute -bottom-[30%] -right-[20%] w-[150%] h-[150%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-200/40 via-transparent to-transparent blur-[150px]"
       />
 
-      {/* Floating Light Streaks */}
-      <div className="absolute inset-0 opacity-30">
+      {/* Floating White Light Streaks */}
+      <div className="absolute inset-0 opacity-40">
         {[...Array(5)].map((_, i) => (
           <motion.div
             key={i}
@@ -55,18 +55,18 @@ const FuturisticBackground = () => {
               opacity: [0, 1, 0],
             }}
             transition={{ 
-              duration: 10 + Math.random() * 10, 
+              duration: 15 + Math.random() * 10, 
               repeat: Infinity, 
               delay: Math.random() * 20,
               ease: "linear" 
             }}
-            className="absolute h-[2px] w-[30%] bg-gradient-to-r from-transparent via-[#00f0ff] to-transparent"
+            className="absolute h-[1px] w-[40%] bg-gradient-to-r from-transparent via-white to-transparent shadow-[0_0_15px_rgba(255,255,255,0.8)]"
             style={{ transform: `rotate(${Math.random() * 20 - 10}deg)` }}
           />
         ))}
       </div>
 
-      {/* Dynamic Cursor Glow */}
+      {/* Dynamic Cursor Glow - Soft Light */}
       <motion.div 
         style={{ 
           x: springX, 
@@ -74,37 +74,38 @@ const FuturisticBackground = () => {
           translateX: '-50%',
           translateY: '-50%'
         }}
-        className="absolute pointer-events-none w-[600px] h-[600px] bg-[radial-gradient(circle,_var(--tw-gradient-stops))] from-[#00f0ff]/10 via-[#b026ff]/5 to-transparent blur-[100px]"
+        className="absolute pointer-events-none w-[800px] h-[800px] bg-[radial-gradient(circle,_var(--tw-gradient-stops))] from-blue-100/30 via-purple-50/10 to-transparent blur-[120px]"
       />
 
-      {/* Floating Particles (Canvas-like but with motion divs for simplicity and react-feeling) */}
-      {[...Array(20)].map((_, i) => (
+      {/* Soft Floating Orbs */}
+      {[...Array(15)].map((_, i) => (
         <motion.div
           key={i}
           initial={{ 
             x: Math.random() * 100 + '%', 
             y: Math.random() * 100 + '%',
-            opacity: Math.random() * 0.5 
+            opacity: Math.random() * 0.4 
           }}
           animate={{ 
             y: ['-10%', '110%'],
-            opacity: [0, 0.5, 0]
+            opacity: [0, 0.3, 0],
+            scale: [1, 1.2, 1]
           }}
           transition={{ 
-            duration: 20 + Math.random() * 20, 
+            duration: 25 + Math.random() * 25, 
             repeat: Infinity,
             ease: "linear",
-            delay: -Math.random() * 20
+            delay: -Math.random() * 25
           }}
-          className="absolute w-1 h-1 bg-white rounded-full blur-[1px]"
+          className="absolute w-2 h-2 bg-white rounded-full blur-[2px] shadow-[0_0_10px_white]"
         />
       ))}
 
-      {/* Top Overlay Mesh */}
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay pointer-events-none" />
+      {/* Overlay Mesh - Subtle Light Noise */}
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02] pointer-events-none" />
       
-      {/* Cinematic Blur Overlay for Depth */}
-      <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_150px_rgba(0,0,0,0.5)]" />
+      {/* Soft Vignette for Depth */}
+      <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_200px_rgba(255,255,255,0.5)]" />
     </div>
   );
 };

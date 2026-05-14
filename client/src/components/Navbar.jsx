@@ -16,7 +16,7 @@ const Navbar = ({ activeSection, setActiveSection, onAdminClick, isAdminAuthenti
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/10 backdrop-blur-xl border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-xl border-b border-white/40 shadow-[0_4px_30px_rgba(0,0,0,0.02)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
@@ -24,7 +24,7 @@ const Navbar = ({ activeSection, setActiveSection, onAdminClick, isAdminAuthenti
             onClick={() => handleNavClick('home')} 
             className="flex items-center gap-3 cursor-pointer group"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00f0ff] to-[#b026ff] flex items-center justify-center shadow-[0_0_20px_rgba(0,240,255,0.4)] group-hover:shadow-[0_0_30px_rgba(0,240,255,0.6)] transition-all">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0070f3] to-[#b026ff] flex items-center justify-center shadow-[0_0_20px_rgba(0,112,243,0.2)] group-hover:shadow-[0_0_30px_rgba(0,112,243,0.4)] transition-all">
               <ShoppingCart className="w-6 h-6 text-white" />
             </div>
             <span className="text-2xl font-cyber glow-text tracking-[0.2em]">GAMINGX</span>
@@ -32,7 +32,7 @@ const Navbar = ({ activeSection, setActiveSection, onAdminClick, isAdminAuthenti
 
           {/* Desktop Nav Items */}
           <div className="hidden md:flex items-center gap-2">
-            <div className="flex items-center bg-white/5 rounded-full p-1.5 border border-white/5 backdrop-blur-2xl">
+            <div className="flex items-center bg-white/40 rounded-full p-1.5 border border-white/60 backdrop-blur-2xl">
               {navItems.map((item) => {
                 const id = item.toLowerCase();
                 const isActive = activeSection === id;
@@ -42,8 +42,8 @@ const Navbar = ({ activeSection, setActiveSection, onAdminClick, isAdminAuthenti
                     onClick={() => handleNavClick(id)}
                     className={`px-6 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 ${
                       isActive 
-                        ? 'bg-white/10 text-[#00f0ff] shadow-[0_0_20px_rgba(255,255,255,0.05)]' 
-                        : 'text-gray-400 hover:text-white hover:bg-white/5'
+                        ? 'bg-white/60 text-[#0070f3] shadow-sm' 
+                        : 'text-gray-500 hover:text-[#1a1a2e] hover:bg-white/30'
                     }`}
                   >
                     {item}
@@ -52,13 +52,13 @@ const Navbar = ({ activeSection, setActiveSection, onAdminClick, isAdminAuthenti
               })}
             </div>
 
-            <div className="flex items-center gap-3 ml-6 pl-6 border-l border-white/10">
+            <div className="flex items-center gap-3 ml-6 pl-6 border-l border-black/5">
               <button
                 onClick={onAdminClick}
                 className={`flex items-center gap-2 px-5 py-2.5 rounded-full border text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 ${
                   isDashboard
-                    ? 'bg-[#b026ff]/20 border-[#b026ff] text-[#b026ff] shadow-[0_0_25px_rgba(176,38,255,0.4)]'
-                    : 'border-white/10 text-gray-500 hover:border-[#b026ff]/50 hover:text-[#b026ff]'
+                    ? 'bg-[#b026ff]/10 border-[#b026ff]/40 text-[#b026ff] shadow-sm'
+                    : 'border-black/5 text-gray-400 hover:border-[#b026ff]/30 hover:text-[#b026ff]'
                 }`}
               >
                 <LayoutDashboard className="w-4 h-4" />
@@ -67,11 +67,11 @@ const Navbar = ({ activeSection, setActiveSection, onAdminClick, isAdminAuthenti
 
               <button 
                 onClick={toggleCart}
-                className="relative p-2.5 rounded-full bg-white/5 border border-white/10 text-white hover:border-[#00f0ff]/50 hover:text-[#00f0ff] transition-all"
+                className="relative p-2.5 rounded-full bg-white/40 border border-white/60 text-[#1a1a2e] hover:border-[#0070f3]/40 hover:text-[#0070f3] transition-all"
               >
                 <ShoppingCart className="w-5 h-5" />
                 {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-gradient-to-r from-[#ff0055] to-[#ff4d00] text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-[0_0_10px_rgba(255,0,85,0.5)]">
+                  <span className="absolute -top-1 -right-1 bg-gradient-to-r from-[#0070f3] to-[#b026ff] text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-lg">
                     {cartCount}
                   </span>
                 )}
@@ -83,18 +83,18 @@ const Navbar = ({ activeSection, setActiveSection, onAdminClick, isAdminAuthenti
           <div className="md:hidden flex items-center gap-4">
             <button 
               onClick={toggleCart}
-              className="relative p-2 text-white"
+              className="relative p-2 text-[#1a1a2e]"
             >
               <ShoppingCart className="w-6 h-6" />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#ff0055] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-[#0070f3] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                   {cartCount}
                 </span>
               )}
             </button>
             <button 
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="p-2 text-white"
+              className="p-2 text-[#1a1a2e]"
             >
               {mobileOpen ? <X /> : <Menu />}
             </button>
@@ -102,14 +102,14 @@ const Navbar = ({ activeSection, setActiveSection, onAdminClick, isAdminAuthenti
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Light */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-black/95 backdrop-blur-2xl border-t border-white/10 overflow-hidden"
+            className="md:hidden bg-white/95 backdrop-blur-2xl border-t border-black/5 overflow-hidden"
           >
             <div className="px-4 py-8 space-y-4">
               {navItems.map((item) => {
@@ -121,28 +121,14 @@ const Navbar = ({ activeSection, setActiveSection, onAdminClick, isAdminAuthenti
                     onClick={() => handleNavClick(id)}
                     className={`w-full text-left px-5 py-4 rounded-2xl text-sm font-bold uppercase tracking-[0.15em] transition-all duration-200 ${
                       isActive 
-                        ? 'bg-gradient-to-r from-[#00f0ff]/20 to-transparent text-[#00f0ff] border-l-2 border-[#00f0ff]' 
-                        : 'text-gray-400 hover:bg-white/5 hover:text-white'
+                        ? 'bg-gradient-to-r from-[#0070f3]/10 to-transparent text-[#0070f3] border-l-2 border-[#0070f3]' 
+                        : 'text-gray-500 hover:bg-black/5 hover:text-[#1a1a2e]'
                     }`}
                   >
                     {item}
                   </button>
                 );
               })}
-              
-              <div className="pt-4 mt-4 border-t border-white/5">
-                <button
-                  onClick={() => { setMobileOpen(false); onAdminClick(); }}
-                  className={`w-full text-left px-5 py-4 rounded-2xl text-sm font-bold uppercase tracking-[0.15em] transition-all duration-200 flex items-center gap-3 ${
-                    isDashboard
-                      ? 'bg-[#b026ff]/20 text-[#b026ff] border border-[#b026ff]/50'
-                      : 'text-gray-500 hover:bg-white/5 hover:text-[#b026ff]'
-                  }`}
-                >
-                  <LayoutDashboard className="w-4 h-4" />
-                  {isAdminAuthenticated ? 'Dashboard' : 'Admin Login'}
-                </button>
-              </div>
             </div>
           </motion.div>
         )}

@@ -6,49 +6,50 @@
 }
 
 body {
-  background-color: #020205;
-  color: white;
+  background-color: #f8faff;
+  color: #1a1a2e;
   overflow-x: hidden;
   font-family: 'Outfit', sans-serif;
 }
 
 ::selection {
-  background-color: rgba(0, 240, 255, 0.3);
-  color: #00f0ff;
+  background-color: rgba(0, 240, 255, 0.2);
+  color: #0070f3;
 }
 
-/* Luxury Glassmorphism */
+/* Luxury Light Glassmorphism */
 .glass-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .glass-card:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(0, 240, 255, 0.3);
-  box-shadow: 0 20px 60px 0 rgba(0, 240, 255, 0.15);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 240, 255, 0.5);
+  box-shadow: 0 20px 60px 0 rgba(0, 240, 255, 0.1);
   transform: translateY(-5px);
 }
 
-/* Glowing Typography */
+/* Glowing Typography - Light Mode */
 .glow-text {
-  background: linear-gradient(to right, #fff, #00f0ff, #b026ff, #fff);
+  background: linear-gradient(to right, #0070f3, #b026ff, #ff0055, #0070f3);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   animation: shine 5s linear infinite;
+  filter: drop-shadow(0 0 10px rgba(0, 112, 243, 0.15));
 }
 
 @keyframes shine {
   to { background-position: 200% center; }
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar - Light */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -58,25 +59,25 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.05);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 240, 255, 0.5);
-}
-
-/* Animated Gradients */
-.bg-mesh {
-  background: 
-    radial-gradient(at 0% 0%, rgba(0, 240, 255, 0.15) 0, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(176, 38, 255, 0.15) 0, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(255, 0, 85, 0.1) 0, transparent 50%),
-    radial-gradient(at 0% 100%, rgba(0, 240, 255, 0.1) 0, transparent 50%);
+  background: rgba(0, 240, 255, 0.4);
 }
 
 .font-cyber {
   font-family: 'Outfit', sans-serif;
   letter-spacing: 0.15em;
   font-weight: 800;
+}
+
+/* Light Mode Gradients */
+.bg-mesh-light {
+  background: 
+    radial-gradient(at 0% 0%, rgba(0, 240, 255, 0.2) 0, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(176, 38, 255, 0.15) 0, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(255, 0, 85, 0.1) 0, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(0, 240, 255, 0.1) 0, transparent 50%);
 }
