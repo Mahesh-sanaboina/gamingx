@@ -30,6 +30,8 @@ const wallets = [
 const CheckoutModal = () => {
   const { isCheckoutOpen, toggleCheckout, clearCart, cartItems } = useCartStore();
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [processingStep, setProcessingStep] = useState(0);
   const [activeMethod, setActiveMethod] = useState('card');
   const [selectedUpi, setSelectedUpi] = useState(null);
   const [selectedBank, setSelectedBank] = useState('');
@@ -40,11 +42,43 @@ const CheckoutModal = () => {
     return sum + (price * item.quantity);
   }, 0);
 
+  const steps = [
+    "Establishing Secure Connection...",
+    "Verifying Credentials...",
+    "Authorizing Transaction...",
+    "Finalizing Payment..."
+  ];
+
   const handlePayment = (e) => {
     e.preventDefault();
-    setIsSuccess(true);
-    confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#b026ff', '#00f0ff', '#ff0055', '#ffdd00'] });
-    setTimeout(() => { setIsSuccess(false); clearCart(); toggleCheckout(); }, 3500);
+    setIsProcessing(true);
+    
+    // Simulate realistic processing steps
+    let currentStep = 0;
+    const interval = setInterval(() => {
+      currentStep++;
+      if (currentStep < steps.length) {
+        setProcessingStep(currentStep);
+      } else {
+        clearInterval(interval);
+        setIsProcessing(false);
+        setIsSuccess(true);
+        confetti({ 
+          particleCount: 150, 
+          spread: 80, 
+          origin: { y: 0.6 }, 
+          colors: ['#b026ff', '#00f0ff', '#ff0055', '#ffdd00'] 
+        });
+        
+        // Final reset and close after success view
+        setTimeout(() => { 
+          setIsSuccess(false); 
+          clearCart(); 
+          toggleCheckout(); 
+          setProcessingStep(0);
+        }, 4000);
+      }
+    }, 1200);
   };
 
   const renderPaymentForm = () => {
@@ -173,7 +207,48 @@ const CheckoutModal = () => {
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
             className="bg-[#080810] border border-white/10 rounded-3xl w-full max-w-3xl overflow-hidden shadow-[0_0_60px_rgba(0,240,255,0.1)] relative"
           >
-            {isSuccess ? (
+            {isProcessing ? (
+              <div className="p-20 flex flex-col items-center justify-center text-center bg-black/40">
+                <div className="relative w-32 h-32 mb-10">
+                  {/* Outer spinning ring */}
+                  <motion.div 
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-0 border-4 border-t-[#00f0ff] border-r-transparent border-b-[#b026ff] border-l-transparent rounded-full shadow-[0_0_20px_rgba(0,240,255,0.3)]"
+                  />
+                  {/* Inner spinning ring (opposite direction) */}
+                  <motion.div 
+                    animate={{ rotate: -360 }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-4 border-4 border-t-transparent border-r-[#b026ff] border-b-transparent border-l-[#00f0ff] rounded-full opacity-60"
+                  />
+                  {/* Center pulsing core */}
+                  <motion.div 
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 1, repeat: Infinity }}
+                    className="absolute inset-10 bg-gradient-to-br from-[#00f0ff] to-[#b026ff] rounded-full blur-sm opacity-50"
+                  />
+                </div>
+
+                <motion.h3 
+                  key={processingStep}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-2xl font-cyber font-bold mb-4 tracking-wider text-white"
+                >
+                  {steps[processingStep]}
+                </motion.h3>
+                
+                <div className="w-full max-w-sm h-1.5 bg-white/5 rounded-full overflow-hidden mb-4">
+                  <motion.div 
+                    initial={{ width: "0%" }}
+                    animate={{ width: `${((processingStep + 1) / steps.length) * 100}%` }}
+                    className="h-full bg-gradient-to-r from-[#b026ff] to-[#00f0ff] shadow-[0_0_10px_#00f0ff]"
+                  />
+                </div>
+                <p className="text-gray-500 font-mono text-xs uppercase tracking-widest animate-pulse">Encryption: AES-256 Active</p>
+              </div>
+            ) : isSuccess ? (
               <div className="p-16 flex flex-col items-center justify-center text-center">
                 <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", damping: 10 }}>
                   <CheckCircle className="w-28 h-28 text-[#00f0ff] mb-6 drop-shadow-[0_0_20px_rgba(0,240,255,0.7)]" />
