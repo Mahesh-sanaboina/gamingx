@@ -1,0 +1,89 @@
+%PDF-1.4
+1 0 obj
+<</Type /Catalog /Pages 2 0 R>>
+endobj
+
+2 0 obj
+<</Type /Pages /Kids [3 0 R] /Count 1>>
+endobj
+
+3 0 obj
+<</Type /Page /Parent 2 0 R /MediaBox [0 0 595 842]
+/Contents 4 0 R /Resources <</Font <</F1 5 0 R>>>>>>
+endobj
+
+4 0 obj
+<</Length 1100>>
+stream
+BT
+/F1 24 Tf
+50 790 Td
+(ULTIMATE PC BUILD GUIDE 2026) Tj
+/F1 12 Tf
+0 -40 Td
+(GamingX Pro Series - Next Generation Hardware Blueprint) Tj
+/F1 11 Tf
+0 -40 Td
+(--- COMPONENTS CHECKLIST ---) Tj
+0 -25 Td
+(CPU:  AMD Ryzen 9 9950X  /  Intel Core Ultra 9 285K) Tj
+0 -22 Td
+(GPU:  NVIDIA RTX 5090  /  AMD Radeon RX 9900 XTX) Tj
+0 -22 Td
+(RAM:  64GB DDR5-6400MHz Dual Channel) Tj
+0 -22 Td
+(SSD:  4TB NVMe PCIe Gen5  +  8TB HDD Storage) Tj
+0 -22 Td
+(MOBO: ASUS ROG Maximus Z890 / MSI MEG X870E ACE) Tj
+0 -22 Td
+(PSU:  1200W 80+ Platinum Modular) Tj
+0 -22 Td
+(COOL: 360mm AIO Liquid Cooler) Tj
+0 -22 Td
+(CASE: Lian Li O11 Dynamic EVO XL) Tj
+0 -40 Td
+(--- BUILD STEPS ---) Tj
+0 -25 Td
+(Step 1: Ground yourself. Use anti-static wrist strap at all times.) Tj
+0 -22 Td
+(Step 2: Install CPU into socket. Apply thermal paste evenly.) Tj
+0 -22 Td
+(Step 3: Mount AIO cooler onto CPU. Route tubes away from GPU.) Tj
+0 -22 Td
+(Step 4: Insert RAM in slots A2 and B2 for dual-channel.) Tj
+0 -22 Td
+(Step 5: Mount the motherboard into the case.) Tj
+0 -22 Td
+(Step 6: Slide GPU into primary PCIe x16 slot. Lock latch.) Tj
+0 -22 Td
+(Step 7: Install NVMe SSDs in M.2 slots.) Tj
+0 -22 Td
+(Step 8: Connect all power cables from PSU.) Tj
+0 -22 Td
+(Step 9: Cable management and airflow optimization.) Tj
+0 -22 Td
+(Step 10: Power on. Enter BIOS. Enable XMP/EXPO for RAM.) Tj
+0 -40 Td
+(GamingX.pro  |  Build Edition 2026  |  All Rights Reserved) Tj
+ET
+endstream
+endobj
+
+5 0 obj
+<</Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold>>
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000274 00000 n 
+0000001426 00000 n 
+
+trailer
+<</Size 6 /Root 1 0 R>>
+startxref
+1510
+%%EOF

@@ -1,0 +1,89 @@
+%PDF-1.4
+1 0 obj
+<</Type /Catalog /Pages 2 0 R>>
+endobj
+
+2 0 obj
+<</Type /Pages /Kids [3 0 R] /Count 1>>
+endobj
+
+3 0 obj
+<</Type /Page /Parent 2 0 R /MediaBox [0 0 595 842]
+/Contents 4 0 R /Resources <</Font <</F1 5 0 R>>>>>>
+endobj
+
+4 0 obj
+<</Length 1200>>
+stream
+BT
+/F1 24 Tf
+50 790 Td
+(HOW TO BUILD GAMES IN 2026) Tj
+/F1 12 Tf
+0 -40 Td
+(GamingX Dev Series - Next Generation Technology Guide) Tj
+/F1 11 Tf
+0 -40 Td
+(--- TOP GAME ENGINES ---) Tj
+0 -25 Td
+(Unreal Engine 5: Industry standard for AAA games.) Tj
+0 -22 Td
+(  Features: Nanite geometry, Lumen GI, MetaHuman, World Partition) Tj
+0 -22 Td
+(Unity 6: Best for mobile and cross-platform indie games.) Tj
+0 -22 Td
+(  Features: DOTS, ECS Architecture, Shader Graph, VFX Graph) Tj
+0 -22 Td
+(Godot 4: Free, open-source. Great for 2D and 3D indie titles.) Tj
+0 -40 Td
+(--- NEW TECHNOLOGIES IN 2026 ---) Tj
+0 -25 Td
+(AI-Driven NPCs: LLM-powered characters with dynamic dialogue.) Tj
+0 -22 Td
+(Procedural Gen: AI builds infinite open worlds in real-time.) Tj
+0 -22 Td
+(Full Ray Tracing: Path-traced lighting for photorealism.) Tj
+0 -22 Td
+(Cloud Streaming: Play AAA games at 4K/120fps on any device.) Tj
+0 -22 Td
+(Neural Rendering: DLSS 4 / FSR 4 for next-gen upscaling.) Tj
+0 -22 Td
+(Web3 Gaming: Blockchain-based in-game asset ownership.) Tj
+0 -40 Td
+(--- DEVELOPER ROADMAP ---) Tj
+0 -25 Td
+(1. Pick an engine. Start with Unity or Godot for beginners.) Tj
+0 -22 Td
+(2. Learn the core language: C# for Unity, C++ for Unreal.) Tj
+0 -22 Td
+(3. Study design patterns: ECS, Observer, State Machine.) Tj
+0 -22 Td
+(4. Build a simple 2D game first. Then progress to 3D.) Tj
+0 -22 Td
+(5. Join game jams. Ship early. Iterate based on feedback.) Tj
+0 -22 Td
+(6. Study shader programming and GPU optimization.) Tj
+0 -40 Td
+(GamingX.pro  |  Dev Edition 2026  |  All Rights Reserved) Tj
+ET
+endstream
+endobj
+
+5 0 obj
+<</Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold>>
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000274 00000 n 
+0000001526 00000 n 
+
+trailer
+<</Size 6 /Root 1 0 R>>
+startxref
+1610
+%%EOF
