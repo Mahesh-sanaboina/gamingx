@@ -62,6 +62,7 @@ const CheckoutModal = () => {
       } else {
         clearInterval(interval);
         setIsProcessing(false);
+        // Final success state
         setIsSuccess(true);
         confetti({ 
           particleCount: 150, 
@@ -70,15 +71,18 @@ const CheckoutModal = () => {
           colors: ['#b026ff', '#00f0ff', '#ff0055', '#ffdd00'] 
         });
         
-        // Final reset and close after success view
-        setTimeout(() => { 
-          setIsSuccess(false); 
-          clearCart(); 
-          toggleCheckout(); 
-          setProcessingStep(0);
-        }, 4000);
+        // Remove auto-close, let user see success and click a button
+        // clearCart(); // Keep cart for summary until they close
       }
     }, 1200);
+  };
+
+  const handleFinalClose = () => {
+    setIsSuccess(false);
+    setIsProcessing(false);
+    setProcessingStep(0);
+    clearCart();
+    toggleCheckout();
   };
 
   const renderPaymentForm = () => {
@@ -249,13 +253,49 @@ const CheckoutModal = () => {
                 <p className="text-gray-500 font-mono text-xs uppercase tracking-widest animate-pulse">Encryption: AES-256 Active</p>
               </div>
             ) : isSuccess ? (
-              <div className="p-16 flex flex-col items-center justify-center text-center">
-                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", damping: 10 }}>
-                  <CheckCircle className="w-28 h-28 text-[#00f0ff] mb-6 drop-shadow-[0_0_20px_rgba(0,240,255,0.7)]" />
+              <div className="p-12 flex flex-col items-center justify-center text-center bg-[#05050a]">
+                <motion.div 
+                  initial={{ scale: 0 }} 
+                  animate={{ scale: 1 }} 
+                  transition={{ type: "spring", damping: 10 }}
+                  className="w-24 h-24 bg-gradient-to-br from-[#00f0ff]/20 to-[#b026ff]/20 rounded-full flex items-center justify-center mb-6 border border-[#00f0ff]/30 shadow-[0_0_30px_rgba(0,240,255,0.2)]"
+                >
+                  <CheckCircle className="w-12 h-12 text-[#00f0ff]" />
                 </motion.div>
-                <h2 className="text-4xl font-cyber font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#b026ff] to-[#00f0ff]">PAYMENT SUCCESSFUL</h2>
-                <p className="text-gray-400 text-lg">Your premium hardware is being prepared for deployment.</p>
-                <p className="text-[#00f0ff] font-mono text-sm mt-3">Order ID: GX-{Math.floor(Math.random()*900000)+100000}</p>
+                
+                <h2 className="text-3xl font-cyber font-bold mb-2 text-white tracking-widest">TRANSACTION COMPLETE</h2>
+                <p className="text-gray-400 mb-8 max-w-sm">Your premium gear has been logged. An encrypted receipt has been dispatched to your terminal.</p>
+                
+                <div className="w-full bg-white/5 rounded-2xl p-6 border border-white/10 mb-8 text-left">
+                  <div className="flex justify-between items-center mb-4 border-b border-white/10 pb-4">
+                    <span className="text-xs uppercase text-gray-500 font-bold">Order Tracking ID</span>
+                    <span className="text-[#00f0ff] font-mono text-sm tracking-tighter">GX-{Math.floor(Math.random()*900000)+100000}</span>
+                  </div>
+                  <div className="flex justify-between items-center mb-2 text-sm">
+                    <span className="text-gray-400">Total Charged</span>
+                    <span className="text-white font-bold font-mono">₹{total.toLocaleString('en-IN')}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-gray-400">Est. Arrival</span>
+                    <span className="text-[#b026ff] font-bold">3-5 Business Days</span>
+                  </div>
+                </div>
+
+                <div className="flex flex-col w-full gap-3">
+                  <button 
+                    onClick={handleFinalClose}
+                    className="w-full py-4 bg-gradient-to-r from-[#b026ff] to-[#00f0ff] text-white font-bold rounded-xl tracking-widest uppercase shadow-[0_0_20px_rgba(176,38,255,0.3)] hover:shadow-[0_0_35px_rgba(0,240,255,0.5)] transition-all"
+                  >
+                    Continue Shopping
+                  </button>
+                  <a 
+                    href="#" 
+                    onClick={(e) => { e.preventDefault(); handleFinalClose(); }}
+                    className="text-xs text-gray-500 uppercase tracking-widest hover:text-white transition-colors flex items-center justify-center gap-2"
+                  >
+                    Track Shipment in Dashboard →
+                  </a>
+                </div>
               </div>
             ) : (
               <>
