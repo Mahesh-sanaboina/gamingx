@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ChevronRight, Shield, Zap, Globe2 } from 'lucide-react';
+import { ChevronRight, Shield, Zap, Globe } from 'lucide-react';
 
 const Home = ({ setActiveSection }) => {
   return (
@@ -74,7 +74,7 @@ const Home = ({ setActiveSection }) => {
           {[
             { icon: Zap, title: "CLEAN ARCHITECTURE", desc: "Minimalist hardware blueprints with peak performance scaling.", color: "from-blue-400" },
             { icon: Shield, title: "QUANTUM SECURE", desc: "Encrypted ethereal network for high-security syndicate links.", color: "from-purple-400" },
-            { icon: Globe2, title: "GLOBAL BROADCAST", desc: "Low latency cloud infrastructure optimized for bright environments.", color: "from-pink-400" }
+            { icon: Globe, title: "GLOBAL BROADCAST", desc: "Low latency cloud infrastructure optimized for bright environments.", color: "from-pink-400" }
           ].map((feature, i) => (
             <motion.div
               key={i}

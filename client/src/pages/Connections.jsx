@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion';
-import { Gamepad2, Users, MessageSquare, Twitter, Instagram, Github } from 'lucide-react';
+import { Gamepad2, Users, MessageSquare, Share2, Camera, Code } from 'lucide-react';
 
 const connections = [
   { id: 1, name: "Steam", icon: Gamepad2, color: "#1b9ef7", desc: "Sync your modern library." },
   { id: 2, name: "Discord", icon: MessageSquare, color: "#5865F2", desc: "Join 50k+ ethereal members." },
-  { id: 3, name: "Instagram", icon: Instagram, color: "#ff0055", desc: "Follow the minimalist evolution." },
-  { id: 4, name: "Twitter", icon: Twitter, color: "#0070f3", desc: "Real-time tech updates." },
+  { id: 3, name: "Instagram", icon: Camera, color: "#ff0055", desc: "Follow the minimalist evolution." },
+  { id: 4, name: "Twitter", icon: Share2, color: "#0070f3", desc: "Real-time tech updates." },
   { id: 5, name: "Nexus Hub", icon: Users, color: "#b026ff", desc: "Access the private network." },
-  { id: 6, name: "Open Specs", icon: Github, color: "#1a1a2e", desc: "View our open build data." },
+  { id: 6, name: "Open Specs", icon: Code, color: "#1a1a2e", desc: "View our open build data." },
 ];
 
 const Connections = () => {

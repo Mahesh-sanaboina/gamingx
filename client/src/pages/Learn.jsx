@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { PlayCircle, Youtube, Tv, Radio } from 'lucide-react';
+import { PlayCircle, Video, Tv, Radio } from 'lucide-react';
 
 const videos = [
   { id: 1, title: "Cyberpunk Mastery", embedId: "8X2kIfS6fb8", category: "Gameplay" }, 
@@ -72,7 +72,7 @@ const Learn = () => {
       <div className="mt-20 w-full max-w-7xl px-4">
          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
-              { icon: Youtube, label: "Ethereal Channel", color: "text-red-500" },
+              { icon: Video, label: "Ethereal Channel", color: "text-red-500" },
               { icon: Tv, label: "Live Broadcast", color: "text-[#0070f3]" },
               { icon: Radio, label: "Syndicate Radio", color: "text-[#b026ff]" }
             ].map((item, i) => (
