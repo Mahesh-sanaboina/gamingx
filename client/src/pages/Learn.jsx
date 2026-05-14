@@ -1,85 +1,91 @@
 import { motion } from 'framer-motion';
-import { PlayCircle } from 'lucide-react';
+import { PlayCircle, Youtube, Tv, Radio } from 'lucide-react';
 
 const videos = [
-  { id: 1, title: "Cyberpunk 2077 Gameplay", embedId: "8X2kIfS6fb8" }, 
-  { id: 2, title: "Valorant VCT Highlights", embedId: "e_E9W2vsRbQ" },
-  { id: 3, title: "Grand Theft Auto VI Trailer", embedId: "QdBZY2fkU-0" },
-  { id: 4, title: "Elden Ring: Shadow of the Erdtree", embedId: "qLZenOn7WUo" },
+  { id: 1, title: "Cyberpunk 2077 Mastery", embedId: "8X2kIfS6fb8", category: "Gameplay" }, 
+  { id: 2, title: "Valorant Pro Tactics", embedId: "e_E9W2vsRbQ", category: "Esports" },
+  { id: 3, title: "GTA VI Cinematic", embedId: "QdBZY2fkU-0", category: "Trailer" },
+  { id: 4, title: "Elden Ring Strategy", embedId: "qLZenOn7WUo", category: "Walkthrough" },
 ];
 
 const Learn = () => {
   return (
-    <section className="min-h-screen py-32 relative w-full">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-24">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
+    <div className="w-full flex flex-col items-center">
+      <div className="text-center mb-20">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="space-y-4"
+        >
+          <span className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-[0.4em] text-[#ff0055]">
+            Gaming Academy // 2026
+          </span>
+          <h2 className="text-5xl md:text-7xl font-cyber font-black glow-text uppercase">
+            SYNDICATE
+          </h2>
+          <p className="text-gray-500 font-medium tracking-widest uppercase text-xs">
+            Learn from the masters. dominate the network.
+          </p>
+        </motion.div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-7xl px-4">
+        {videos.map((video, i) => (
+          <motion.div
+            key={video.id}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-5xl md:text-7xl font-cyber font-black text-transparent bg-clip-text bg-gradient-to-r from-[#ff0055] via-white to-[#00f0ff] mb-4 drop-shadow-[0_0_20px_rgba(255,0,85,0.4)]"
+            transition={{ delay: i * 0.1 }}
+            className="glass-card p-2 rounded-[2.5rem] group relative overflow-hidden"
           >
-            LEARN & WATCH
-          </motion.h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#ff0055] to-[#00f0ff] mx-auto rounded-full mb-6"></div>
-          <p className="text-gray-400 text-lg tracking-widest uppercase font-light">Learn from the pros. Master your craft.</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
-          {videos.map((video, index) => (
-            <motion.div
-              key={video.id}
-              initial={{ opacity: 0, scale: 0.95, y: 30 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.6 }}
-              whileHover={{ y: -5 }}
-              className="group relative glass-panel rounded-3xl overflow-hidden hover-neon-glow transition-all duration-500 w-full"
-            >
-              <div className="aspect-video relative bg-black w-full">
-                <iframe
+            <div className="relative aspect-video rounded-[2rem] overflow-hidden">
+               <iframe
                   width="100%"
                   height="100%"
-                  src={`https://www.youtube.com/embed/${video.embedId}?controls=1`}
+                  src={`https://www.youtube.com/embed/${video.embedId}?controls=1&modestbranding=1&rel=0`}
                   title={video.title}
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
-                  className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                  className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700"
                 ></iframe>
                 
-                {/* Overlay that fades out on hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#030014] via-transparent to-transparent pointer-events-none opacity-80 group-hover:opacity-0 transition-opacity duration-500"></div>
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-100 group-hover:opacity-0 transition-opacity duration-500">
-                  <PlayCircle className="w-16 h-16 text-white/50" />
+                {/* Visual Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute top-4 left-4">
+                   <div className="px-3 py-1 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-[8px] font-black uppercase tracking-widest text-white">
+                     {video.category}
+                   </div>
                 </div>
-              </div>
-              <div className="p-6 relative z-10 bg-gradient-to-t from-black/80 to-transparent">
-                <h3 className="text-xl font-bold text-white font-sans tracking-wide drop-shadow-md group-hover:text-[#00f0ff] transition-colors">{video.title}</h3>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+            </div>
 
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex justify-center w-full"
-        >
-          <a href="https://www.twitch.tv/directory/esports" target="_blank" rel="noopener noreferrer" className="w-full max-w-xl flex items-center gap-6 p-8 rounded-3xl glass-panel hover-neon-glow transition-all duration-500 group relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#b026ff]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            <div className="w-20 h-20 rounded-2xl bg-black/50 border border-[#b026ff]/30 flex items-center justify-center shadow-[0_0_15px_rgba(176,38,255,0.2)] group-hover:shadow-[0_0_25px_rgba(176,38,255,0.5)] transition-shadow">
-              <span className="text-4xl">🔴</span>
+            <div className="p-8">
+              <div className="flex justify-between items-center">
+                <h3 className="text-xl font-black text-white uppercase tracking-wider group-hover:text-[#00f0ff] transition-colors">{video.title}</h3>
+                <PlayCircle className="w-6 h-6 text-gray-600 group-hover:text-white transition-colors" />
+              </div>
             </div>
-            <div className="relative z-10">
-              <h4 className="text-2xl font-bold text-white mb-2 group-hover:text-[#b026ff] transition-colors tracking-wide">Live Tournaments</h4>
-              <p className="text-gray-400">Watch top tier competitive gameplay.</p>
-            </div>
-          </a>
-        </motion.div>
+          </motion.div>
+        ))}
       </div>
-    </section>
+
+      {/* Live Channels */}
+      <div className="mt-20 w-full max-w-7xl px-4">
+         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {[
+              { icon: Youtube, label: "Official Channel", color: "text-red-500" },
+              { icon: Tv, label: "Live Broadcast", color: "text-[#00f0ff]" },
+              { icon: Radio, label: "Syndicate Radio", color: "text-[#b026ff]" }
+            ].map((item, i) => (
+              <div key={i} className="glass-card p-8 rounded-3xl flex items-center gap-6 hover:border-white/20 transition-all cursor-pointer">
+                <item.icon className={`w-8 h-8 ${item.color}`} />
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white">{item.label}</span>
+              </div>
+            ))}
+         </div>
+      </div>
+    </div>
   );
 };
 

@@ -1,88 +1,111 @@
 import { motion } from 'framer-motion';
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, Star, ShieldCheck, Zap } from 'lucide-react';
 import { useCartStore } from '../store/useCart';
 
 const products = [
-  { id: 1, name: "Aether Core PC", price: "₹49", image: "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&q=80&w=800" },
-  { id: 2, name: "Nexus RTX 4090", price: "₹99", image: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&q=80&w=800" },
-  { id: 3, name: "Cyber Mechanical Keyboard", price: "₹39", image: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&q=80&w=800" },
-  { id: 4, name: "Precision Mouse", price: "₹29", image: "/precision_mouse.png" },
-  { id: 5, name: "UltraWide 4K Monitor", price: "₹79", image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&q=80&w=800" },
-  { id: 6, name: "Immersive Headset", price: "₹59", image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&q=80&w=800" },
+  { id: 1, name: "Aether Core PC", price: "₹1,49,999", image: "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&q=80&w=800", rating: 4.9 },
+  { id: 2, name: "Nexus RTX 4090", price: "₹1,59,999", image: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&q=80&w=800", rating: 5.0 },
+  { id: 3, name: "Cyber Mechanical", price: "₹12,999", image: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&q=80&w=800", rating: 4.8 },
+  { id: 4, name: "Precision Mouse", price: "₹8,499", image: "/precision_mouse_1778741461541.png", rating: 4.7 }, // Updated image path if exists
+  { id: 5, name: "UltraWide 4K", price: "₹89,999", image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&q=80&w=800", rating: 4.9 },
+  { id: 6, name: "Immersive Headset", price: "₹19,999", image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&q=80&w=800", rating: 4.8 },
 ];
 
 const Buy = () => {
   const addToCart = useCartStore(state => state.addToCart);
 
   return (
-    <section className="min-h-screen py-32 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-24">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
+    <div className="w-full flex flex-col items-center">
+      <div className="text-center mb-20">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="space-y-4"
+        >
+          <span className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-[0.4em] text-[#b026ff]">
+            Premium Arsenal // 2026
+          </span>
+          <h2 className="text-5xl md:text-7xl font-cyber font-black glow-text uppercase">
+            EQUIPMENT
+          </h2>
+          <p className="text-gray-500 font-medium tracking-widest uppercase text-xs">
+            Military grade hardware for the global syndicate.
+          </p>
+        </motion.div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl px-4">
+        {products.map((product, i) => (
+          <motion.div
+            key={product.id}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-5xl md:text-7xl font-cyber font-black text-transparent bg-clip-text bg-gradient-to-r from-[#00f0ff] via-white to-[#b026ff] mb-4 drop-shadow-[0_0_20px_rgba(0,240,255,0.4)]"
+            transition={{ delay: i * 0.1 }}
+            className="glass-card p-4 rounded-[2.5rem] group relative overflow-hidden"
           >
-            PREMIUM ARSENAL
-          </motion.h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#00f0ff] to-[#b026ff] mx-auto rounded-full mb-6"></div>
-          <p className="text-gray-400 text-lg tracking-widest uppercase font-light">Equip yourself with next-generation hardware.</p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {products.map((product, index) => (
-            <motion.div 
-              key={product.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              whileHover={{ y: -10 }}
-              className="group relative glass-panel rounded-3xl p-2 hover-neon-glow transition-all duration-500 flex flex-col"
-            >
-              <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-3xl pointer-events-none"></div>
+            {/* Image Container */}
+            <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden mb-6">
+              <motion.img 
+                whileHover={{ scale: 1.1 }}
+                src={product.image} 
+                alt={product.name} 
+                className="w-full h-full object-cover transition-all duration-700 opacity-80 group-hover:opacity-100"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               
-              <div className="aspect-[4/3] overflow-hidden rounded-2xl relative">
-                {/* Floating Image */}
-                <motion.div 
-                  className="w-full h-full"
-                  whileHover={{ scale: 1.15 }}
-                  transition={{ duration: 0.7, ease: "easeOut" }}
-                >
-                  <img 
-                    src={product.image} 
-                    alt={product.name} 
-                    className="w-full h-full object-cover opacity-70 group-hover:opacity-100 mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-700"
-                  />
-                </motion.div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none"></div>
-                
-                {/* Price Tag Hologram */}
-                <div className="absolute top-4 right-4 glass-panel px-4 py-2 rounded-full border border-[#00f0ff]/30 text-[#00f0ff] font-cyber tracking-widest shadow-[0_0_15px_rgba(0,240,255,0.2)]">
-                  {product.price}
+              {/* Floating Badge */}
+              <div className="absolute top-4 right-4 flex gap-2">
+                <div className="px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/10 flex items-center gap-1">
+                  <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" />
+                  <span className="text-[10px] font-bold text-white">{product.rating}</span>
                 </div>
               </div>
+            </div>
 
-              <div className="p-6 text-center flex-1 flex flex-col justify-between relative z-10">
-                <h3 className="text-2xl font-bold text-white mb-6 font-sans tracking-wide drop-shadow-md">{product.name}</h3>
-                
-                <button 
-                  onClick={() => addToCart(product)}
-                  className="relative overflow-hidden w-full py-4 rounded-xl font-bold uppercase tracking-[0.2em] transition-all duration-300 group/btn bg-white/5 border border-white/10 hover:border-[#b026ff]/50"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#b026ff] to-[#00f0ff] opacity-0 group-hover/btn:opacity-20 transition-opacity duration-300"></div>
-                  <span className="relative flex items-center justify-center gap-3 text-gray-300 group-hover/btn:text-white transition-colors">
-                    <ShoppingCart className="w-5 h-5 group-hover/btn:drop-shadow-[0_0_8px_#00f0ff]" /> 
-                    <span className="group-hover/btn:drop-shadow-[0_0_8px_#b026ff]">Add to Cart</span>
-                  </span>
-                </button>
+            {/* Content */}
+            <div className="px-4 pb-4">
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h3 className="text-xl font-black text-white uppercase tracking-wider mb-1">{product.name}</h3>
+                  <div className="flex gap-2 opacity-50">
+                    <ShieldCheck className="w-3 h-3 text-[#00f0ff]" />
+                    <span className="text-[8px] font-black uppercase tracking-widest text-white">Certified</span>
+                  </div>
+                </div>
+                <span className="text-xl font-cyber text-[#00f0ff]">{product.price}</span>
               </div>
-            </motion.div>
-          ))}
-        </div>
+
+              <button
+                onClick={() => addToCart(product)}
+                className="w-full py-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center gap-3 transition-all hover:bg-white hover:text-black group/btn"
+              >
+                <ShoppingCart className="w-4 h-4 transition-transform group-hover/btn:scale-110" />
+                <span className="text-[10px] font-black uppercase tracking-[0.2em]">Add to Cart</span>
+              </button>
+            </div>
+
+            {/* Hover Glow Effect */}
+            <div className="absolute -inset-[100%] bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-[-45deg] group-hover:translate-x-[200%] transition-transform duration-1000" />
+          </motion.div>
+        ))}
       </div>
-    </section>
+
+      {/* Trust Badges */}
+      <div className="mt-32 w-full max-w-5xl grid grid-cols-2 md:grid-cols-4 gap-8 opacity-40 grayscale hover:grayscale-0 transition-all">
+         {[
+           { icon: Zap, text: "ULTRA LATENCY" },
+           { icon: ShieldCheck, text: "SECURE PAY" },
+           { icon: Star, text: "ELITE GRADE" },
+           { icon: Globe2, text: "GLOBAL SHIP" }
+         ].map((badge, i) => (
+           <div key={i} className="flex flex-col items-center gap-3">
+             <badge.icon className="w-8 h-8" />
+             <span className="text-[8px] font-black tracking-[0.4em] uppercase text-white">{badge.text}</span>
+           </div>
+         ))}
+      </div>
+    </div>
   );
 };
 
