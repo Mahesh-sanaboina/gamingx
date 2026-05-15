@@ -50,13 +50,22 @@ const Home = ({ setActiveSection }) => {
           >
             <button 
               onClick={() => setActiveSection('buy')}
-              className="group relative px-12 py-5 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 active:scale-95"
+              className="group relative inline-flex items-center justify-center gap-6 px-16 py-7 rounded-full transition-all duration-500 hover:scale-[1.02] active:scale-95 shadow-[0_20px_60px_rgba(0,112,243,0.1)] overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0070f3] to-[#b026ff] opacity-90" />
-              <div className="absolute inset-[2px] bg-white rounded-[14px] flex items-center justify-center gap-3 transition-colors group-hover:bg-transparent">
-                <span className="relative z-10 text-[#1a1a2e] font-black text-xs uppercase tracking-[0.3em] group-hover:text-white transition-colors">Launch Experience</span>
-                <ChevronRight className="w-4 h-4 text-[#1a1a2e] group-hover:text-white group-hover:translate-x-1 transition-all" />
+              {/* Animated Gradient Border */}
+              <div className="absolute inset-0 p-[2px] rounded-full bg-gradient-to-r from-[#0070f3] via-[#b026ff] to-[#0070f3] bg-[length:200%_100%] animate-gradient-x">
+                <div className="w-full h-full bg-white rounded-full transition-colors group-hover:bg-transparent" />
               </div>
+
+              {/* Text & Icon */}
+              <span className="relative z-10 text-[#1a1a2e] font-black text-[10px] md:text-xs uppercase tracking-[0.4em] group-hover:text-white transition-all duration-300 whitespace-nowrap">
+                Launch Experience
+              </span>
+              <div className="relative z-10 w-8 h-8 rounded-full bg-gradient-to-r from-[#0070f3] to-[#b026ff] flex items-center justify-center transition-all duration-500 group-hover:bg-white group-hover:scale-110 shadow-lg">
+                <ChevronRight className="w-4 h-4 text-white group-hover:text-[#0070f3] transition-colors" />
+              </div>
+
+              {/* Hover Shine Effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
             </button>
           </motion.div>

@@ -12,6 +12,8 @@ import CheckoutModal from './components/CheckoutModal';
 import FuturisticBackground from './components/FuturisticBackground';
 import AdminLoginModal from './components/AdminLoginModal';
 import MouseFollower from './components/MouseFollower';
+import IntroSequence from './components/IntroSequence';
+import { useAuthStore } from './store/useAuth';
 
 // Transition variants for the cinematic page switch
 const pageVariants = {
@@ -24,9 +26,10 @@ const pageTransition = { type: "tween", ease: "anticipate", duration: 0.5 };
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
+  const [hasLaunched, setHasLaunched] = useState(false);
   console.log("Current Section:", activeSection);
+  const { isAdminAuthenticated, setAdminAuthenticated } = useAuthStore();
   const [showAdminLogin, setShowAdminLogin] = useState(false);
-  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
   const mainRef = useRef(null);
 
   // Scroll to top on section change
@@ -45,7 +48,7 @@ function App() {
   };
 
   const handleAdminLoginSuccess = () => {
-    setIsAdminAuthenticated(true);
+    setAdminAuthenticated(true);
     setShowAdminLogin(false);
     setActiveSection('dashboard');
   };
@@ -64,15 +67,23 @@ function App() {
 
   return (
     <div className="relative text-[#1a1a2e] font-sans min-h-screen selection:bg-[#00f0ff]/20 selection:text-[#0070f3] overflow-hidden">
+      <AnimatePresence>
+        {!hasLaunched && (
+          <IntroSequence onComplete={() => setHasLaunched(true)} />
+        )}
+      </AnimatePresence>
+
       <FuturisticBackground />
       <MouseFollower />
 
-      <div className="relative z-10 h-screen flex flex-col">
+      <motion.div 
+        animate={{ opacity: hasLaunched ? 1 : 0 }}
+        className="relative z-10 h-screen flex flex-col"
+      >
         <Navbar
           activeSection={activeSection}
           setActiveSection={setActiveSection}
           onAdminClick={handleAdminClick}
-          isAdminAuthenticated={isAdminAuthenticated}
         />
         <CartSidebar />
         <CheckoutModal />
@@ -100,7 +111,7 @@ function App() {
             </motion.div>
           </AnimatePresence>
         </main>
-      </div>
+      </motion.div>
     </div>
   );
 }

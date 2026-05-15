@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Download, Eye, CheckCircle, Loader2, Cpu, Monitor, Zap, ShieldCheck } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Download, CheckCircle, Loader2, Cpu, Monitor, Zap, ShieldCheck } from 'lucide-react';
 
 const guides = [
   {
@@ -27,7 +27,6 @@ const guides = [
 
 const Building = () => {
   const [downloading, setDownloading] = useState(null);
-  const [previewing, setPreviewing] = useState(null);
 
   const handleDownload = (guide) => {
     setDownloading(guide.id);
@@ -112,11 +111,11 @@ const Building = () => {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 mt-auto">
+              <div className="flex flex-col gap-4 mt-auto">
                 <button 
                   onClick={() => handleDownload(guide)}
                   disabled={downloading === guide.id}
-                  className="flex-1 relative group/btn py-5 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.02] active:scale-95 disabled:opacity-80"
+                  className="w-full relative group/btn py-5 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.02] active:scale-95 disabled:opacity-80"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-[#0070f3] to-[#b026ff] opacity-90" />
                   <div className="relative z-10 flex items-center justify-center gap-3">
@@ -132,14 +131,6 @@ const Building = () => {
                       </>
                     )}
                   </div>
-                </button>
-
-                <button 
-                  onClick={() => setPreviewing(guide)}
-                  className="flex-1 py-5 rounded-2xl bg-white/40 border border-white/80 flex items-center justify-center gap-3 hover:bg-white/80 transition-all font-black text-[10px] uppercase tracking-[0.2em] text-[#1a1a2e]"
-                >
-                  <Eye className="w-4 h-4" />
-                  <span>Open Preview</span>
                 </button>
               </div>
             </div>
@@ -166,64 +157,7 @@ const Building = () => {
          </div>
       </div>
 
-      {/* Preview Modal */}
-      <AnimatePresence>
-        {previewing && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-white/40 backdrop-blur-2xl flex items-center justify-center p-4"
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 30 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 30 }}
-              className="bg-white border border-white/80 rounded-[3.5rem] w-full max-w-2xl max-h-[80vh] overflow-hidden flex flex-col shadow-2xl relative"
-            >
-              <div className="p-8 border-b border-black/5 flex items-center justify-between bg-white/40">
-                <h3 className="text-xl font-black text-[#1a1a2e] uppercase tracking-widest flex items-center gap-3">
-                  <Eye className="w-5 h-5 text-[#0070f3]" /> Guide Preview
-                </h3>
-                <button onClick={() => setPreviewing(null)} className="p-2 hover:bg-black/5 rounded-full text-gray-400"><Eye className="w-6 h-6 rotate-45" /></button>
-              </div>
-              <div className="flex-1 overflow-y-auto p-10 custom-scrollbar">
-                <div className="space-y-6">
-                  <div className="p-8 bg-gray-50 rounded-3xl border border-black/5">
-                    <h4 className="text-sm font-black text-[#1a1a2e] uppercase tracking-widest mb-4">TABLE OF CONTENTS</h4>
-                    <ul className="space-y-3">
-                      {previewing.id === 1 ? (
-                        ["Gaming PC Basics", "Monitor & Peripheral Setup", "Budget Optimization", "Beginner Streaming", "RGB Layouts"].map((t, idx) => (
-                          <li key={idx} className="flex items-center gap-3 text-xs text-gray-500 uppercase tracking-wider">
-                            <CheckCircle className="w-3 h-3 text-[#0070f3]" /> {t}
-                          </li>
-                        ))
-                      ) : (
-                        ["High-End Hardware Selection", "Dual-PC Streaming Node", "Pro Audio & XLR Setup", "Cable Routing Strategy", "Performance Benchmarking"].map((t, idx) => (
-                          <li key={idx} className="flex items-center gap-3 text-xs text-gray-500 uppercase tracking-wider">
-                            <CheckCircle className="w-3 h-3 text-[#b026ff]" /> {t}
-                          </li>
-                        ))
-                      )}
-                    </ul>
-                  </div>
-                  <p className="text-gray-400 text-sm leading-relaxed uppercase tracking-tight text-center pt-8 border-t border-black/5">
-                    Full document available for download.
-                  </p>
-                </div>
-              </div>
-              <div className="p-8 bg-white/40 border-t border-black/5">
-                <button 
-                  onClick={() => { handleDownload(previewing); setPreviewing(null); }}
-                  className="w-full py-4 bg-[#1a1a2e] text-white font-black uppercase tracking-[0.3em] text-[10px] rounded-2xl hover:bg-[#0070f3] transition-all"
-                >
-                  Unlock Full Guide
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
     </div>
   );
 };

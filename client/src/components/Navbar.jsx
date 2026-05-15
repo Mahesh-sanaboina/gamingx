@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { ShoppingCart, LayoutDashboard, Menu, X } from 'lucide-react';
 import { useCartStore } from '../store/useCart';
+import { useAuthStore } from '../store/useAuth';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Navbar = ({ activeSection, setActiveSection, onAdminClick, isAdminAuthenticated }) => {
+const Navbar = ({ activeSection, setActiveSection, onAdminClick }) => {
   const navItems = ['Home', 'Buy', 'Learn', 'Building', 'Connections'];
   const { cartItems, toggleCart } = useCartStore();
+  const { isAdminAuthenticated } = useAuthStore();
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const isDashboard = activeSection === 'dashboard';
   const [mobileOpen, setMobileOpen] = useState(false);
